@@ -1,0 +1,66 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# NuGet
+packages/
+*.nupkg
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# App settings secrets
+appsettings.Development.json
+appsettings.Local.json
+
+# EF Core
+Migrations/*.Designer.cs
+
+# Publish output
+publish/
+wwwroot/dist/
+
+# Angular
+node_modules/
+dist/
+.angular/
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test Results
+TestResults/
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# SQL Server LocalDB
+*.mdf
+*.ldf
+
+# Temporary files
+*.tmp
+*.temp
+
+# Generated files
+Generated/
