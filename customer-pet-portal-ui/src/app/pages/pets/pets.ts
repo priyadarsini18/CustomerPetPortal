@@ -302,24 +302,29 @@ export class Pets implements OnInit {
 
   }
 
-  deactivatePet(
-  pet: any
-): void {
+  deactivatePet(pet: any): void {
 
   if (
-    !confirm(
-      'Are you sure you want to deactivate this pet?'
-    )
+    !confirm('Are you sure you want to deactivate this pet?')
   ) {
     return;
   }
 
-  pet.isActive = false;
+  const index = this.pets.findIndex(
+    p => p.petId === pet.petId
+  );
+
+  if (index !== -1) {
+
+    this.pets[index] = {
+      ...this.pets[index],
+      isActive: false
+    };
+
+    this.pets = [...this.pets];
+  }
 
 }
-
-  
-
   viewCoverage(
     pet: any
   ): void {
