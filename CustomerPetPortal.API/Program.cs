@@ -8,15 +8,18 @@ using CustomerPetPortal.API.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders();
 
+builder.Logging.AddConsole();
+
+builder.Logging.AddDebug();
 builder.Services.AddDbContext<AppDbContext>(
     options =>
     options.UseSqlite(
         builder.Configuration.GetConnectionString(
             "DefaultConnection")));
 // Dependency Injection
-builder.Services.AddScoped<ICustomerRepository,
-    CustomerRepository>();
+builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
 
 builder.Services.AddScoped<ICustomerService,
     CustomerService>();

@@ -19,6 +19,6 @@ namespace CustomerPetPortal.API.DTOs.Policy
 
         public DateTime EffectiveDate { get; set; }
 
-        public DateTime ExpiryDate { get; set; }
+public DateTime ExpiryDate { get; set; }
     }
 }

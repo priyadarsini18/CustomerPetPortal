@@ -6,5 +6,7 @@ namespace CustomerPetPortal.API.Repositories.Interfaces
     {
         Task<List<CustomerClaim>>
             GetClaimsByCustomerIdAsync(int customerId);
+            Task<CustomerClaim> AddClaimAsync(
+    CustomerClaim claim);
     }
 }

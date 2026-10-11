@@ -9,21 +9,25 @@ namespace CustomerPetPortal.API.Repositories
     {
         private readonly AppDbContext _context;
 
-        public PolicyRepository(AppDbContext context)
+        public PolicyRepository(
+            AppDbContext context)
         {
             _context = context;
         }
 
         public async Task<List<CustomerPolicy>>
-            GetPoliciesByCustomerIdAsync(int customerId)
+            GetPoliciesByCustomerIdAsync(
+                int customerId)
         {
             return await _context.CustomerPolicies
-                .Where(x => x.CustomerId == customerId)
+                .Where(p =>
+                    p.CustomerId == customerId)
                 .ToListAsync();
         }
 
-        public async Task<bool> HasActivePolicyForPetAsync(
-            int petId)
+        public async Task<bool>
+            HasActivePolicyForPetAsync(
+                int petId)
         {
             return await _context.CustomerPolicies
                 .AnyAsync(p =>
@@ -31,13 +35,27 @@ namespace CustomerPetPortal.API.Repositories
                     p.Status == "Active");
         }
 
-        public async Task<bool> HasActivePolicyForCustomerAsync(
-            int customerId)
+        public async Task<bool>
+            HasActivePolicyForCustomerAsync(
+                int customerId)
         {
             return await _context.CustomerPolicies
                 .AnyAsync(p =>
                     p.CustomerId == customerId &&
                     p.Status == "Active");
+        }
+
+        public async Task<CustomerPolicy>
+            AddPolicyAsync(
+                CustomerPolicy policy)
+        {
+            _context.CustomerPolicies
+                .Add(policy);
+
+            await _context
+                .SaveChangesAsync();
+
+            return policy;
         }
     }
 }

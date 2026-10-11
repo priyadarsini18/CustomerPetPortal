@@ -11,5 +11,8 @@ namespace CustomerPetPortal.API.Repositories.Interfaces
 
 Task<bool> HasActivePolicyForCustomerAsync(
     int customerId);
+    Task<CustomerPolicy>
+    AddPolicyAsync(
+        CustomerPolicy policy);
     }
 }

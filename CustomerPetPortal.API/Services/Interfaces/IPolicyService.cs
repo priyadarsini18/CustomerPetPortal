@@ -6,5 +6,8 @@ namespace CustomerPetPortal.API.Services.Interfaces
     {
         Task<List<PolicyDto>>
             GetPoliciesByCustomerIdAsync(int customerId);
+            Task<PolicyDto> AddPolicyAsync(
+    int customerId,
+    CreatePolicyDto dto);
     }
 }

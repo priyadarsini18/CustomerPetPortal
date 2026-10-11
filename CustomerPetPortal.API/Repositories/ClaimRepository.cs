@@ -21,5 +21,17 @@ namespace CustomerPetPortal.API.Repositories
                 .Where(c => c.CustomerId == customerId)
                 .ToListAsync();
         }
+        public async Task<CustomerClaim>
+    AddClaimAsync(
+        CustomerClaim claim)
+{
+    _context.CustomerClaims
+        .Add(claim);
+
+    await _context
+        .SaveChangesAsync();
+
+    return claim;
+}
     }
 }

@@ -1,18 +1,19 @@
-# 🐾 PAWCARE - Customer & Pet Insurance Portal
+# 🐾 PawCare - Customer and Pet Account Portal
 
-## Project Overview
+## Overview
 
-PAWCARE is a Customer and Pet Insurance Management Portal developed using Angular, ASP.NET Core Web API, Entity Framework Core, and SQLite.
+PawCare is a Customer and Pet Account Portal developed as part of POC 4 - Pet Insurance Assignment.
 
-The application enables customers to:
+The application allows customers to:
 
-- Register and Login
-- Manage Pets
-- View Dashboard Information
-- View Insurance Policies
-- View Claims
-- Manage Profile Information
-- Import and Export Customer Data
+- Register and manage their profiles
+- Manage pet information
+- View insurance policies
+- View claims history
+- Access customer dashboard information
+- Import and export customer data using Excel
+
+The solution follows a layered architecture using Angular, ASP.NET Core Web API, EF Core, LINQ, SQLite, and NUnit.
 
 ---
 
@@ -24,24 +25,30 @@ The application enables customers to:
 - TypeScript
 - HTML
 - CSS
-- Bootstrap
 
 ## Backend
 
 - ASP.NET Core Web API
 - C#
 - Entity Framework Core
-- Repository Pattern
-- Dependency Injection
-- Service Layer Architecture
-
-## Database
-
+- LINQ
 - SQLite
 
 ## Testing
 
 - NUnit
+- Moq
+- FluentAssertions
+
+## Documentation
+
+- Swagger/OpenAPI
+- Postman Collection
+
+## Version Control
+
+- Git
+- GitHub
 
 ---
 
@@ -49,159 +56,204 @@ The application enables customers to:
 
 ```text
 Angular UI
-     ↓
-Controllers
-     ↓
-Services
-     ↓
+    |
+    V
+ASP.NET Core Web API
+    |
+    V
+Business Services
+    |
+    V
 Repositories
-     ↓
-AppDbContext
-     ↓
+    |
+    V
+Entity Framework Core
+    |
+    V
 SQLite Database
 ```
 
 ---
 
-# Project Structure
+# Features
 
-```text
-CustomerPetPortal.API
-│
-├── Controllers
-├── Services
-├── Repositories
-├── DTOs
-├── Models
-├── Data
-├── Middleware
-├── Program.cs
-└── appsettings.json
+## Customer Registration
 
-customer-pet-portal-ui
-│
-├── pages
-├── core/services
-├── routing
-└── components
-```
+Customers can register using:
 
----
+- First Name
+- Last Name
+- Email
+- Phone Number
+- Address
+- ZIP Code
+- Password
+- Confirm Password
 
-# Implemented Features
+### Validations
 
-## Customer Management
-
-✅ Customer Registration
-
-✅ Customer Login
-
-✅ View Customer Profile
-
-✅ Update Customer Profile
+- Mandatory field validation
+- Email format validation
+- Unique email validation
+- Password confirmation validation
 
 ---
 
-## Dashboard
+## Customer Dashboard
 
-✅ Total Pets
+Dashboard contains:
 
-✅ Active Policies
+### Summary Cards
 
-✅ Open Claims
+- Total Pets
+- Active Policies
+- Open Claims
+- Policies Expiring Soon
 
-✅ Policies Expiring Soon
+### Sections
+
+- My Pets
+- My Policies
+- Recent Claims
+- Notifications
 
 ---
 
 ## Pet Management
 
-✅ Add Pet
+### Pet Information
 
-✅ View Pets
+- Pet Name
+- Species
+- Breed
+- Date Of Birth
+- Age
+- Status
 
-✅ Update Pet
+### Actions
 
-✅ Deactivate Pet
+- Add Pet
+- Edit Pet
+- Deactivate Pet
+- View Coverage
+
+### Business Rules
+
+- Pet Date Of Birth cannot be in the future.
+- Every pet must belong to an active customer.
+- Duplicate active pets are not allowed.
 
 ---
 
 ## Policies
 
-✅ View Policies
+Policies are available in read-only mode.
+
+### Details
+
+- Policy Number
+- Coverage Type
+- Premium
+- Start Date
+- End Date
+- Policy Status
 
 ---
 
 ## Claims
 
-✅ View Claims
+Claims are available in read-only mode.
+
+### Details
+
+- Claim Number
+- Treatment Date
+- Claimed Amount
+- Approved Amount
+- Claim Status
 
 ---
 
-## Excel Operations
+## Customer Profile
 
-✅ Import Customer Data
+Customers can:
 
-✅ Export Customer Data
+- View Profile
+- Update Phone Number
+- Update Address
+- Update Communication Preference
 
 ---
 
 # Business Rules Implemented
 
-## Pet DOB Validation
+✅ Customer email must be unique.
 
-Future dates are not allowed.
+✅ Customer email must be valid.
 
-```csharp
-if(dto.DateOfBirth > DateTime.Today)
-{
-    throw new ArgumentException(
-        "Pet date of birth cannot be in the future.");
-}
-```
+✅ Pet DOB cannot be in the future.
 
-## Customer Validation
+✅ Every pet belongs to an existing customer.
 
-Only active customers can add pets.
+✅ Duplicate active pets are not allowed.
 
-## Duplicate Pet Validation
+✅ Dashboard data is customer-specific.
 
-Active customers cannot have duplicate active pets with the same name.
+✅ Policies are read-only.
 
-## Pet Deactivation
+✅ Claims are read-only.
 
-Pets with active policies are deactivated instead of being permanently deleted.
+✅ Customer cannot be deleted while active policies exist.
+
+✅ Sensitive information is not logged.
 
 ---
 
-# Dependency Injection
+# LINQ Features Demonstrated
 
-Configured in Program.cs
+## Any()
 
-```csharp
-builder.Services.AddScoped<
-    ICustomerService,
-    CustomerService>();
+Used for:
 
-builder.Services.AddScoped<
-    ICustomerRepository,
-    CustomerRepository>();
+- Duplicate email validation
+- Duplicate pet validation
 
-builder.Services.AddScoped<
-    IPetService,
-    PetService>();
+## All()
 
-builder.Services.AddScoped<
-    IPetRepository,
-    PetRepository>();
-```
+Used for:
 
-Benefits:
+- Customer deletion eligibility check
 
-- Loose Coupling
-- Better Maintainability
-- Easier Unit Testing
-- SOLID Principles
+## Count()
+
+Used for:
+
+- Dashboard summary counts
+
+## Select()
+
+Used for:
+
+- DTO projection
+- Dashboard projection
+
+## Join()
+
+Used for:
+
+- Customer and Pet relationship queries
+
+## Include()
+
+Used for:
+
+- Loading related entities
+
+## ThenInclude()
+
+Used for:
+
+- Nested relationship loading
 
 ---
 
@@ -209,126 +261,180 @@ Benefits:
 
 ## Customer APIs
 
+### Register Customer
+
 ```http
-POST   /api/customers
-POST   /api/customers/login
-GET    /api/customers/{id}
-PUT    /api/customers/{id}
+POST /api/customers
+```
+
+### Get Customer
+
+```http
+GET /api/customers/{id}
+```
+
+### Update Customer
+
+```http
+PUT /api/customers/{id}
+```
+
+### Delete Customer
+
+```http
 DELETE /api/customers/{id}
 ```
 
+---
+
 ## Pet APIs
 
+### Add Pet
+
 ```http
-POST   /api/customers/{id}/pets
-GET    /api/customers/{id}/pets
-PUT    /api/customers/{id}/pets/{petId}
+POST /api/customers/{id}/pets
+```
+
+### Get Pets
+
+```http
+GET /api/customers/{id}/pets
+```
+
+### Update Pet
+
+```http
+PUT /api/customers/{id}/pets/{petId}
+```
+
+### Delete / Deactivate Pet
+
+```http
 DELETE /api/customers/{id}/pets/{petId}
 ```
 
-## Dashboard
+---
+
+## Dashboard API
 
 ```http
 GET /api/customers/{id}/dashboard
 ```
 
-## Policies
+---
+
+## Policies API
 
 ```http
 GET /api/customers/{id}/policies
 ```
 
-## Claims
+---
+
+## Claims API
 
 ```http
 GET /api/customers/{id}/claims
 ```
 
-## Excel Operations
+---
+
+## Excel APIs
+
+### Import Data
 
 ```http
 POST /api/excel/customers/import
-GET  /api/excel/customers/export
+```
+
+### Export Data
+
+```http
+GET /api/excel/customers/export
 ```
 
 ---
 
-# Database Tables
+# Database Entities
+
+## Customers
 
 ```text
-Customers
-Pets
-Policies
-Claims
-Addresses
+CustomerId
+FirstName
+LastName
+Email
+Phone
+CommunicationPreference
+IsActive
 ```
 
----
-
-# Request Flow
+## Addresses
 
 ```text
-Angular
-   ↓
-Controller
-   ↓
-Service
-   ↓
-Repository
-   ↓
-AppDbContext
-   ↓
-SQLite Database
+AddressId
+CustomerId
+Line1
+City
+State
+ZipCode
 ```
 
-Response:
+## Pets
 
 ```text
-SQLite Database
-   ↑
-AppDbContext
-   ↑
-Repository
-   ↑
-Service
-   ↑
-Controller
-   ↑
-Angular
+PetId
+CustomerId
+PetName
+Species
+Breed
+DateOfBirth
+IsActive
+```
+
+## CustomerPolicies
+
+```text
+PolicyId
+PolicyNumber
+CustomerId
+PetId
+Premium
+Status
+```
+
+## CustomerClaims
+
+```text
+ClaimId
+ClaimNumber
+CustomerId
+PetId
+TreatmentDate
+ClaimAmount
+ApprovedAmount
+Status
 ```
 
 ---
 
-# Design Patterns Used
+# Validation Implemented
 
-- Layered Architecture
-- Repository Pattern
-- Dependency Injection
-- DTO Pattern
-- Service-Oriented Architecture
+## Customer
 
----
+- Required fields validation
+- Email validation
+- Duplicate email validation
 
-# Learning Outcomes
+## Pets
 
-This project helped me gain experience in:
-
-- Angular Development
-- ASP.NET Core Web API
-- Entity Framework Core
-- SQLite Database
-- REST API Development
-- Dependency Injection
-- Repository Pattern
-- Service Layer Architecture
-- NUnit Testing
+- Required fields validation
+- Date Of Birth validation
+- Future DOB prevention
+- Duplicate active pet validation
 
 ---
 
-# Author
+# Logging
 
-**Priyadarsini Sreenivasan**
-
-Trainee Developer
-
-PAWCARE - Customer & Pet Insurance Portal
+Structured logging is implemented

@@ -20,8 +20,18 @@ namespace CustomerPetPortal.API.Controllers
             int customerId,
             CreatePetDto dto)
         {
+            if (dto.DateOfBirth.Date > DateTime.Today)
+            {
+                return BadRequest(
+                    "Pet Date of Birth cannot be in the future."
+                );
+            }
+
             var pet =
-                await _service.AddPetAsync(customerId, dto);
+                await _service.AddPetAsync(
+                    customerId,
+                    dto
+                );
 
             return Ok(pet);
         }
@@ -31,7 +41,9 @@ namespace CustomerPetPortal.API.Controllers
             int customerId)
         {
             var pets =
-                await _service.GetPetsByCustomerIdAsync(customerId);
+                await _service.GetPetsByCustomerIdAsync(
+                    customerId
+                );
 
             return Ok(pets);
         }
@@ -41,11 +53,23 @@ namespace CustomerPetPortal.API.Controllers
             int petId,
             UpdatePetDto dto)
         {
+            if (dto.DateOfBirth.Date > DateTime.Today)
+            {
+                return BadRequest(
+                    "Pet Date of Birth cannot be in the future."
+                );
+            }
+
             var pet =
-                await _service.UpdatePetAsync(petId, dto);
+                await _service.UpdatePetAsync(
+                    petId,
+                    dto
+                );
 
             if (pet == null)
+            {
                 return NotFound();
+            }
 
             return Ok(pet);
         }
@@ -55,10 +79,14 @@ namespace CustomerPetPortal.API.Controllers
             int petId)
         {
             var result =
-                await _service.DeletePetAsync(petId);
+                await _service.DeletePetAsync(
+                    petId
+                );
 
             if (!result)
+            {
                 return NotFound();
+            }
 
             return NoContent();
         }

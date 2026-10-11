@@ -5,6 +5,12 @@ namespace CustomerPetPortal.API.Services.Interfaces
     public interface IClaimService
     {
         Task<List<ClaimDto>>
-            GetClaimsByCustomerIdAsync(int customerId);
+            GetClaimsByCustomerIdAsync(
+                int customerId);
+
+        Task<ClaimDto>
+            AddClaimAsync(
+                int customerId,
+                CreateClaimDto dto);
     }
 }

@@ -1,5 +1,6 @@
 using CustomerPetPortal.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using CustomerPetPortal.API.DTOs.Policy;
 
 namespace CustomerPetPortal.API.Controllers
 {
@@ -25,5 +26,18 @@ namespace CustomerPetPortal.API.Controllers
 
             return Ok(policies);
         }
+        [HttpPost]
+public async Task<IActionResult> AddPolicy(
+    int customerId,
+    [FromBody] CreatePolicyDto dto)
+{
+    var policy =
+        await _service
+            .AddPolicyAsync(
+                customerId,
+                dto);
+
+    return Ok(policy);
+}
     }
 }

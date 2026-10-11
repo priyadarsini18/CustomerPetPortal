@@ -9,7 +9,8 @@ namespace CustomerPetPortal.API.Services
     {
         private readonly AppDbContext _context;
 
-        public DashboardService(AppDbContext context)
+        public DashboardService(
+            AppDbContext context)
         {
             _context = context;
         }
@@ -17,26 +18,31 @@ namespace CustomerPetPortal.API.Services
         public async Task<DashboardDto> GetDashboardAsync(
             int customerId)
         {
-            var petsCount = await _context.Pets
-                .CountAsync(p =>
-                    p.CustomerId == customerId &&
-                    p.IsActive);
+            var petsCount =
+                await _context.Pets
+                    .CountAsync(p =>
+                        p.CustomerId == customerId &&
+                        p.IsActive);
 
-            var activePolicies = await _context.CustomerPolicies
-                .CountAsync(p =>
-                    p.CustomerId == customerId &&
-                    p.Status == "Active");
-
-            var openClaims = await _context.CustomerClaims
-                .CountAsync(c =>
-                    c.CustomerId == customerId &&
-                    c.Status == "Open");
-
-            var policiesExpiringSoon =
+            var activePolicies =
                 await _context.CustomerPolicies
                     .CountAsync(p =>
                         p.CustomerId == customerId &&
-                        p.ExpiryDate <= DateTime.Today.AddDays(30));
+                        p.Status == "Active");
+
+            var openClaims =
+                await _context.CustomerClaims
+                    .CountAsync(c =>
+                        c.CustomerId == customerId &&
+                        c.Status == "Open");
+
+            var policiesExpiringSoon =
+    await _context.CustomerPolicies
+        .CountAsync(p =>
+            p.CustomerId == customerId &&
+            p.ExpiryDate <=
+                DateTime.Today.AddDays(30));
+
 
             // LINQ Join Demonstration
             var customerPets =
@@ -76,7 +82,8 @@ namespace CustomerPetPortal.API.Services
                 PetsCount = petsCount,
                 ActivePolicies = activePolicies,
                 OpenClaims = openClaims,
-                PoliciesExpiringSoon = policiesExpiringSoon
+                PoliciesExpiringSoon =
+                    policiesExpiringSoon
             };
         }
     }

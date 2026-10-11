@@ -9,15 +9,17 @@ namespace CustomerPetPortal.API.Services.Interfaces
 
         Task<List<CustomerDto>> GetAllCustomersAsync();
 
-        Task<CustomerDto?> GetCustomerByIdAsync(int id);
+        Task<CustomerDto?> GetCustomerByIdAsync(
+            int id);
 
         Task<CustomerDto?> UpdateCustomerAsync(
             int id,
             UpdateCustomerDto dto);
 
-        Task<bool> DeleteCustomerAsync(int id);
-    Task<CustomerDto?> LoginAsync(
-    string email);
-    }
+        Task<bool> DeleteCustomerAsync(
+            int id);
 
+        Task<CustomerDto?> LoginAsync(
+            string email);
+    }
 }

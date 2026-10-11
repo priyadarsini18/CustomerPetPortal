@@ -72,7 +72,9 @@ if (petExists)
                 PetName = pet.PetName,
                 Species = pet.Species,
                 Breed = pet.Breed,
-                DateOfBirth = pet.DateOfBirth,
+                DateOfBirth =
+    DateOnly.FromDateTime(
+        pet.DateOfBirth),
                 IsActive = pet.IsActive
             };
         }
@@ -90,7 +92,9 @@ if (petExists)
                 PetName = p.PetName,
                 Species = p.Species,
                 Breed = p.Breed,
-                DateOfBirth = p.DateOfBirth,
+                DateOfBirth =
+    DateOnly.FromDateTime(
+        p.DateOfBirth),
                 IsActive = p.IsActive
             }).ToList();
         }
@@ -123,7 +127,9 @@ if (petExists)
                 PetName = pet.PetName,
                 Species = pet.Species,
                 Breed = pet.Breed,
-                DateOfBirth = pet.DateOfBirth,
+                DateOfBirth =
+DateOnly.FromDateTime(
+pet.DateOfBirth),
                 IsActive = pet.IsActive
             };
         }

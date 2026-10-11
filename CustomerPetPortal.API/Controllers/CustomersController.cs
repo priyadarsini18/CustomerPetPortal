@@ -8,13 +8,13 @@ namespace CustomerPetPortal.API.Controllers
     [Route("api/customers")]
     public class CustomersController : ControllerBase
     {
-
-
         private readonly ICustomerService _customerService;
 
-        public CustomersController(ICustomerService customerService)
+        public CustomersController(
+            ICustomerService customerService)
         {
-            _customerService = customerService;
+            _customerService =
+                customerService;
         }
 
         // POST: api/customers
@@ -22,26 +22,33 @@ namespace CustomerPetPortal.API.Controllers
         public async Task<IActionResult> RegisterCustomer(
             [FromBody] CreateCustomerDto dto)
         {
-            var customer = await _customerService.CreateCustomerAsync(dto);
+            var customer =
+                await _customerService
+                    .CreateCustomerAsync(dto);
 
             return CreatedAtAction(
                 nameof(GetCustomerById),
-                new { id = customer.CustomerId },
+                new
+                {
+                    id = customer.CustomerId
+                },
                 customer);
         }
+
         [HttpPost("login")]
 public async Task<IActionResult> Login(
-    LoginDto dto)
+    [FromBody] LoginDto dto)
 {
     var customer =
-        await _customerService
-            .LoginAsync(dto.Email);
+    await _customerService
+        .LoginAsync(dto.Email);
 
     if (customer == null)
     {
         return Unauthorized(new
         {
-            Message = "Invalid Email"
+            Message =
+                "Invalid Email or Password"
         });
     }
 
@@ -51,25 +58,29 @@ public async Task<IActionResult> Login(
         CustomerId = customer.CustomerId,
         CustomerName =
             $"{customer.FirstName} {customer.LastName}"
-        });
+    });
 }
+
+
         // GET: api/customers
         [HttpGet]
-public async Task<IActionResult> GetAllCustomers()
-{
-    var customers =
-        await _customerService.GetAllCustomersAsync();
+        public async Task<IActionResult> GetAllCustomers()
+        {
+            var customers =
+                await _customerService
+                    .GetAllCustomersAsync();
 
-    return Ok(customers);
-}
-
+            return Ok(customers);
+        }
 
         // GET: api/customers/1
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCustomerById(int id)
+        public async Task<IActionResult> GetCustomerById(
+            int id)
         {
             var customer =
-                await _customerService.GetCustomerByIdAsync(id);
+                await _customerService
+                    .GetCustomerByIdAsync(id);
 
             if (customer == null)
             {
@@ -87,8 +98,10 @@ public async Task<IActionResult> GetAllCustomers()
             [FromBody] UpdateCustomerDto dto)
         {
             var updatedCustomer =
-                await _customerService.UpdateCustomerAsync(
-                    id, dto);
+                await _customerService
+                    .UpdateCustomerAsync(
+                        id,
+                        dto);
 
             if (updatedCustomer == null)
             {
@@ -105,7 +118,8 @@ public async Task<IActionResult> GetAllCustomers()
             int id)
         {
             var deleted =
-                await _customerService.DeleteCustomerAsync(id);
+                await _customerService
+                    .DeleteCustomerAsync(id);
 
             if (!deleted)
             {

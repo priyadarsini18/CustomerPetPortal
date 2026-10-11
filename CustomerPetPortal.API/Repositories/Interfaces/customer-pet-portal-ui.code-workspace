@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "customer-pet-portal-ui",
+			"path": "../../../../customer-pet-portal-ui"
+		},
+		{
+			"name": "CustomerPetPortal",
+			"path": "../../.."
+		}
+	],
+	"settings": {}
+}
