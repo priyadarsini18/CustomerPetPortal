@@ -1,0 +1,272 @@
+<div class="pets-container">
+
+  <!-- HEADER -->
+  <div class="pets-header">
+
+    <div>
+      <h1>🐾 My Pets</h1>
+      <p>Manage your beloved pets and their coverage</p>
+    </div>
+
+    <button
+      class="view-btn"
+      (click)="viewPets()">
+
+      🐾 View My Pets
+
+    </button>
+
+  </div>
+
+  <!-- ADD PET -->
+  <div class="add-pet-card">
+
+    <h3>Add New Pet</h3>
+
+    <div class="form-grid">
+
+      <input
+        type="text"
+        placeholder="Pet Name"
+        [(ngModel)]="newPet.petName">
+
+      <input
+        type="text"
+        placeholder="Species"
+        [(ngModel)]="newPet.species">
+
+      <input
+        type="text"
+        placeholder="Breed"
+        [(ngModel)]="newPet.breed">
+
+      <input
+        type="date"
+        [(ngModel)]="newPet.dateOfBirth"
+        [max]="today">
+
+    </div>
+
+    <button
+      class="add-btn"
+      (click)="addPet()">
+
+      Add Pet
+
+    </button>
+
+  </div>
+
+  <!-- EDIT PET -->
+  <div
+    class="edit-card"
+    *ngIf="editPetModel.petId">
+
+    <h2>Edit Pet</h2>
+
+    <input
+      type="text"
+      [(ngModel)]="editPetModel.petName">
+
+    <input
+      type="text"
+      [(ngModel)]="editPetModel.species">
+
+    <input
+      type="text"
+      [(ngModel)]="editPetModel.breed">
+
+    <input
+      type="date"
+      [(ngModel)]="editPetModel.dateOfBirth"
+      [max]="today">
+
+    <button
+      class="save-btn"
+      (click)="updatePet()">
+
+      Save Changes
+
+    </button>
+
+    <button
+      class="close-btn"
+      (click)="cancelEdit()">
+
+      Cancel
+
+    </button>
+
+  </div>
+
+  <!-- PET LIST -->
+  <div
+    class="pets-grid"
+    *ngIf="pets.length > 0">
+
+    <div
+      class="pet-card"
+      *ngFor="let pet of pets">
+
+      <div class="pet-card-header">
+
+        <div class="pet-avatar">
+          🐾
+        </div>
+
+      </div>
+
+      <div class="pet-body">
+
+        <h3>{{ pet.petName }}</h3>
+
+        <div class="pet-info">
+
+          <p>
+            <strong>Species:</strong>
+            {{ pet.species }}
+          </p>
+
+          <p>
+            <strong>Breed:</strong>
+            {{ pet.breed }}
+          </p>
+
+          <p>
+            <strong>Date of Birth:</strong>
+            {{ pet.dateOfBirth | date:'dd MMM yyyy' }}
+          </p>
+
+          <p>
+            <strong>Age:</strong>
+            {{ calculateAge(pet.dateOfBirth) }} Years
+          </p>
+
+        </div>
+
+        <!-- STATUS -->
+
+        <div
+          class="status active"
+          *ngIf="pet.isActive !== false">
+
+          ✅ Active Pet
+
+        </div>
+
+        <div
+          class="status inactive"
+          *ngIf="pet.isActive === false">
+
+          ❌ Inactive Pet
+
+        </div>
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="action-buttons">
+
+          <button
+            class="view-btn"
+            (click)="viewCoverage(pet)">
+
+            Coverage
+
+          </button>
+
+          <button
+            class="edit-btn"
+            (click)="editPet(pet)">
+
+            Edit
+
+          </button>
+
+          <button
+            class="deactivate-btn"
+            *ngIf="pet.isActive !== false"
+            (click)="deactivatePet(pet)">
+
+            Deactivate
+
+          </button>
+
+          <button
+            class="activate-btn"
+            *ngIf="pet.isActive === false"
+            (click)="pet.isActive = true">
+
+            Activate
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- NO PETS -->
+
+  <div
+    class="no-pets"
+    *ngIf="pets.length === 0">
+
+    <h2>🐾 No Pets Loaded</h2>
+
+    <p>
+      Click "View My Pets" to load your pets.
+    </p>
+
+  </div>
+
+  <!-- COVERAGE MODAL -->
+
+  <div
+    class="modal-overlay"
+    *ngIf="selectedCoverage">
+
+    <div class="modal-card">
+
+      <h2>🩺 Pet Coverage Details</h2>
+
+      <p>
+        <strong>Pet Name:</strong>
+        {{ selectedCoverage.petName }}
+      </p>
+
+      <p>
+        <strong>Species:</strong>
+        {{ selectedCoverage.species }}
+      </p>
+
+      <p>
+        <strong>Breed:</strong>
+        {{ selectedCoverage.breed }}
+      </p>
+
+      <p>
+        <strong>Date of Birth:</strong>
+        {{ selectedCoverage.dateOfBirth | date:'dd MMM yyyy' }}
+      </p>
+
+      <p>
+        <strong>Age:</strong>
+        {{ calculateAge(selectedCoverage.dateOfBirth) }} Years
+      </p>
+
+      <button
+        class="close-btn"
+        (click)="closeCoverage()">
+
+        Close
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

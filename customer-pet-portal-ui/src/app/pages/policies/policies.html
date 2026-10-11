@@ -1,0 +1,122 @@
+<div class="policies-container">
+
+  <h1>🛡 My Policies</h1>
+
+  <p>
+    View and manage your pet insurance policies.
+  </p>
+
+  <div class="policy-count">
+
+    Total Policies: {{ policies.length }}
+
+  </div>
+
+  <div
+    class="policy-card"
+    *ngFor="let policy of policies">
+
+    <h2>
+
+      Policy {{ policy.policyNumber }}
+
+    </h2>
+
+    <p>
+
+      <strong>Coverage:</strong>
+      {{ policy.coverage }}
+
+    </p>
+
+    <p>
+
+      <strong>Premium:</strong>
+      ₹{{ policy.premium }}
+
+    </p>
+
+    <p>
+
+      <strong>Status:</strong>
+      ✅ {{ policy.status }}
+
+    </p>
+
+    <p>
+
+      <strong>Effective:</strong>
+      {{ policy.effectiveDate | date:'dd MMM yyyy' }}
+
+    </p>
+
+    <p>
+
+      <strong>Expiry:</strong>
+      {{ policy.expiryDate | date:'dd MMM yyyy' }}
+
+    </p>
+
+    <button
+      class="view-btn"
+      (click)="viewPolicy(policy)">
+
+      View Details
+
+    </button>
+
+  </div>
+
+</div>
+
+<div
+  class="modal-overlay"
+  *ngIf="selectedPolicy">
+
+  <div class="modal-card">
+
+    <h2>
+      🛡 Policy Details
+    </h2>
+
+    <p>
+      <strong>Policy Number:</strong>
+      {{ selectedPolicy.policyNumber }}
+    </p>
+
+    <p>
+      <strong>Coverage:</strong>
+      {{ selectedPolicy.coverage }}
+    </p>
+
+    <p>
+      <strong>Premium:</strong>
+      ₹{{ selectedPolicy.premium }}
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      {{ selectedPolicy.status }}
+    </p>
+
+    <p>
+      <strong>Effective Date:</strong>
+      {{ selectedPolicy.effectiveDate | date:'dd MMM yyyy' }}
+    </p>
+
+    <p>
+      <strong>Expiry Date:</strong>
+      {{ selectedPolicy.expiryDate | date:'dd MMM yyyy' }}
+    </p>
+
+    <button
+      class="close-btn"
+      (click)="closePolicy()">
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

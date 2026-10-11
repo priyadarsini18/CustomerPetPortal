@@ -1,0 +1,703 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:host{
+  display:block;
+}
+
+.login-container{
+  min-height:100vh;
+  display:flex;
+  font-family:'Segoe UI',sans-serif;
+  background:#f8fafc;
+}
+
+/* LEFT PANEL */
+
+.left-panel{
+  flex:1;
+  position:relative;
+  overflow:hidden;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  padding:40px;
+  color:white;
+
+  background:linear-gradient(
+      -45deg,
+      #2563eb,
+      #7c3aed,
+      #06b6d4,
+      #3b82f6
+  );
+
+  background-size:400% 400%;
+
+  animation:gradientMove 12s ease infinite;
+}
+
+.left-panel h1{
+  font-size:48px;
+  margin-bottom:15px;
+  z-index:2;
+}
+
+.tagline{
+  font-size:20px;
+  margin-bottom:10px;
+  z-index:2;
+}
+
+.subtitle{
+  text-align:center;
+  opacity:.9;
+  line-height:1.6;
+  z-index:2;
+}
+
+.hero-image{
+  width:380px;
+  margin-top:30px;
+  z-index:2;
+
+  animation:float 4s ease-in-out infinite;
+}
+
+/* STATS CARD */
+
+.stats-box{
+
+  margin-top:25px;
+
+  padding:20px 30px;
+
+  border-radius:20px;
+
+  background:rgba(
+      255,
+      255,
+      255,
+      0.15
+  );
+
+  backdrop-filter:blur(12px);
+
+  z-index:2;
+
+  transition:.3s;
+}
+
+.stats-box:hover{
+
+  transform:translateY(-8px);
+
+  box-shadow:
+    0 15px 30px rgba(
+      255,
+      255,
+      255,
+      0.2
+    );
+}
+
+.stats-box div{
+  margin:10px 0;
+  font-weight:500;
+}
+
+/* FLYING PAW PRINTS */
+
+.paw{
+  position:absolute;
+  font-size:40px;
+  opacity:.12;
+}
+
+.paw1{
+  left:10%;
+  bottom:-50px;
+  animation:movePaw 12s linear infinite;
+}
+
+.paw2{
+  left:50%;
+  bottom:-50px;
+  animation:movePaw 12s linear infinite;
+  animation-delay:4s;
+}
+
+.paw3{
+  right:15%;
+  bottom:-50px;
+  animation:movePaw 12s linear infinite;
+  animation-delay:8s;
+}
+
+/* RIGHT CARD */
+
+.login-card{
+
+  width:460px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+  padding:50px;
+
+  position:relative;
+  overflow:hidden;
+
+  background:linear-gradient(
+      135deg,
+      rgba(255,255,255,0.95),
+      rgba(239,246,255,0.95)
+  );
+
+  backdrop-filter:blur(20px);
+
+  box-shadow:
+    0 20px 60px rgba(
+      37,
+      99,
+      235,
+      0.15
+    );
+
+  animation:slideIn 1s ease;
+
+  border-left:4px solid #2563eb;
+}
+
+.login-card::before{
+
+  content:'';
+
+  position:absolute;
+
+  width:220px;
+  height:220px;
+
+  border-radius:50%;
+
+  background:rgba(
+      37,
+      99,
+      235,
+      .08
+  );
+
+  top:-100px;
+  right:-100px;
+}
+
+.typing{
+  text-align:center;
+
+  font-size:42px;
+  font-weight:900;
+
+  color:#1e40af;
+
+  margin-bottom:35px;
+
+  text-shadow:
+    0 2px 10px rgba(
+      37,
+      99,
+      235,
+      0.2
+    );
+}
+
+.description{
+
+  color:#64748b;
+
+  margin-top:15px;
+
+  margin-bottom:30px;
+}
+
+/* FORM */
+
+.form-group{
+  margin-bottom:20px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:8px;
+  font-weight:600;
+  color:#334155;
+}
+
+.form-group input{
+
+  width:100%;
+
+  padding:14px;
+
+  border:1px solid #d1d5db;
+
+  border-radius:12px;
+
+  transition:.3s;
+}
+.typing{
+  text-align:center;
+
+  font-size:42px;
+  font-weight:900;
+
+  color:#1e40af;
+
+  line-height:1.3;
+
+  margin-bottom:35px;
+  margin-top:10px;
+}
+
+.form-group input:focus{
+
+  outline:none;
+
+  border-color:#2563eb;
+
+  box-shadow:
+    0 0 12px rgba(
+      37,
+      99,
+      235,
+      0.25
+    );
+}
+
+/* PASSWORD */
+
+.password-wrapper{
+  position:relative;
+}
+
+.eye-icon{
+
+  position:absolute;
+
+  right:15px;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  cursor:pointer;
+
+  font-size:18px;
+}
+
+/* REMEMBER */
+
+.remember-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:25px;
+}
+
+/* BUTTON */
+
+.login-btn{
+
+  width:100%;
+
+  border:none;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  cursor:pointer;
+
+  color:white;
+
+  font-size:16px;
+
+  font-weight:600;
+
+  background:linear-gradient(
+      135deg,
+      #2563eb,
+      #7c3aed
+  );
+
+  transition:.3s;
+}
+
+.login-btn:hover{
+
+  transform:
+      translateY(-3px);
+
+  box-shadow:
+      0 15px 30px rgba(
+          37,
+          99,
+          235,
+          0.3
+      );
+}
+
+/* REGISTER */
+
+.register-link{
+
+  text-align:center;
+
+  margin-top:25px;
+}
+
+.register-link a{
+
+  color:#2563eb;
+
+  text-decoration:none;
+
+  font-weight:600;
+}
+
+.register-link a:hover{
+  text-decoration:underline;
+}
+
+/* FOOTER */
+
+.footer-text{
+
+  text-align:center;
+
+  margin-top:20px;
+
+  color:#94a3b8;
+
+  font-size:13px;
+}
+
+/* ANIMATIONS */
+
+@keyframes float{
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-15px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+}
+
+@keyframes movePaw{
+
+  from{
+    transform:translateY(0);
+  }
+
+  to{
+    transform:translateY(-900px);
+  }
+}
+
+@keyframes slideIn{
+
+  from{
+    opacity:0;
+    transform:translateX(60px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes gradientMove{
+
+  0%{
+    background-position:0% 50%;
+  }
+
+  50%{
+    background-position:100% 50%;
+  }
+
+  100%{
+    background-position:0% 50%;
+  }
+}
+
+@keyframes typing{
+
+  from{
+    width:0;
+  }
+
+  to{
+    width:12ch;
+  }
+}
+
+@keyframes blink{
+
+  50%{
+    border-color:transparent;
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+  .login-container{
+    flex-direction:column;
+  }
+  .login-card{
+  padding:60px 50px;
+}
+
+  .login-card{
+  overflow:visible;
+}
+
+  .hero-image{
+    width:260px;
+  }
+
+  .left-panel{
+    min-height:50vh;
+  }
+}
+/* WALKING DOG */
+
+.dog{
+  position:absolute;
+  bottom:40px;
+  left:-100px;
+  font-size:55px;
+  z-index:2;
+
+  animation:walkDog 15s linear infinite;
+}
+
+@keyframes walkDog{
+
+  0%{
+    left:-100px;
+  }
+
+  100%{
+    left:110%;
+  }
+
+}
+
+/* WALKING CAT */
+
+.cat{
+  position:absolute;
+  top:80px;
+  right:-100px;
+  font-size:45px;
+  z-index:2;
+
+  animation:walkCat 18s linear infinite;
+}
+
+@keyframes walkCat{
+
+  0%{
+    right:-100px;
+  }
+
+  100%{
+    right:110%;
+  }
+
+}
+
+/* JUMPING DOG */
+
+.dog2{
+  position:absolute;
+  bottom:150px;
+  left:20%;
+  font-size:60px;
+  z-index:2;
+
+  animation:jumpDog 4s ease-in-out infinite;
+}
+
+@keyframes jumpDog{
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-40px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
+}
+
+/* BOUNCING CAT */
+
+.cat2{
+  position:absolute;
+  top:200px;
+  right:15%;
+  font-size:50px;
+  z-index:2;
+
+  animation:bounceCat 5s ease-in-out infinite;
+}
+
+@keyframes bounceCat{
+
+  0%{
+    transform:rotate(-5deg);
+  }
+
+  50%{
+    transform:
+      rotate(5deg)
+      translateY(-20px);
+  }
+
+  100%{
+    transform:rotate(-5deg);
+  }
+
+}
+
+/* PAW TRAIL */
+
+.left-panel::before{
+  content:"🐾 🐾 🐾 🐾 🐾";
+  position:absolute;
+
+  bottom:20px;
+  width:100%;
+
+  text-align:center;
+
+  opacity:0.12;
+  font-size:30px;
+
+  animation:pawTrail 8s linear infinite;
+}
+
+@keyframes pawTrail{
+
+  0%{
+    transform:translateX(-80px);
+  }
+
+  100%{
+    transform:translateX(80px);
+  }
+
+}
+.bubble{
+  position:absolute;
+  border-radius:50%;
+  z-index:0;
+}
+
+.bubble1{
+  width:160px;
+  height:160px;
+
+  background:
+    rgba(37,99,235,0.08);
+
+  top:-50px;
+  right:-50px;
+
+  animation:floatBubble 8s infinite;
+}
+
+.bubble2{
+  width:120px;
+  height:120px;
+
+  background:
+    rgba(124,58,237,0.08);
+
+  bottom:50px;
+  left:-40px;
+
+  animation:floatBubble 10s infinite;
+}
+
+.bubble3{
+  width:80px;
+  height:80px;
+
+  background:
+    rgba(6,182,212,0.10);
+
+  top:45%;
+  right:30px;
+
+  animation:floatBubble 6s infinite;
+}
+@keyframes floatBubble{
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-20px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+}
+.typing{
+
+  background:linear-gradient(
+    90deg,
+    #2563eb,
+    #7c3aed
+  );
+
+  background-clip:text;
+  -webkit-background-clip:text;
+
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+
+  font-size:32px;
+  font-weight:700;
+}
+.login-card:hover{
+
+  transform:
+    translateY(-5px);
+
+  transition:.4s;
+}

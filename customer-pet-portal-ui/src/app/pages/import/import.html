@@ -1,0 +1,40 @@
+<div class="import-container">
+
+  <div class="import-card">
+
+    <h1>📥 Import Excel Workbook</h1>
+
+    <p>
+      Upload customer, pet, policy, and claim data from an Excel file.
+    </p>
+
+    <div class="upload-section">
+
+      <input
+        type="file"
+        accept=".xlsx,.xls"
+        (change)="onFileSelected($event)">
+
+    </div>
+
+    <div
+      class="file-name"
+      *ngIf="selectedFile">
+
+      ✅ Selected File:
+      {{ selectedFile.name }}
+
+    </div>
+
+    <button
+      class="import-btn"
+      type="button"
+      (click)="importWorkbook()">
+
+      📥 Import Workbook
+
+    </button>
+
+  </div>
+
+</div>

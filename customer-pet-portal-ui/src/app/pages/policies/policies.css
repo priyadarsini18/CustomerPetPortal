@@ -1,0 +1,215 @@
+.policies-container {
+  padding: 30px;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* Header */
+
+.policies-header {
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+  );
+
+  color: white;
+
+  padding: 30px;
+
+  border-radius: 24px;
+
+  margin-bottom: 30px;
+
+  box-shadow:
+    0 10px 25px rgba(37,99,235,0.2);
+}
+
+.policies-header h1 {
+  margin-bottom: 10px;
+  font-size: 34px;
+}
+
+.policy-count {
+  margin-top: 15px;
+
+  display: inline-block;
+
+  background: rgba(255,255,255,0.2);
+
+  padding: 10px 16px;
+
+  border-radius: 999px;
+
+  font-weight: 600;
+}
+
+/* Cards */
+
+.policies-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(350px, 1fr));
+
+  gap: 25px;
+}
+
+.policy-card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 25px;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.08);
+
+  transition: 0.3s ease;
+
+  border: 1px solid #e2e8f0;
+}
+
+.policy-card:hover {
+
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 20px 35px rgba(0,0,0,0.12);
+
+}
+
+.policy-card h2 {
+
+  color: #2563eb;
+
+  margin-bottom: 18px;
+
+}
+
+.policy-card p {
+
+  margin-bottom: 12px;
+
+  color: #334155;
+
+  font-size: 15px;
+
+}
+
+/* Status */
+
+.status-active {
+
+  background: #dcfce7;
+
+  color: #166534;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-weight: 700;
+
+  display: inline-block;
+}
+
+/* Buttons */
+
+.view-btn {
+
+  width: 100%;
+
+  margin-top: 15px;
+
+  border: none;
+
+  padding: 12px;
+
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+  );
+
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.view-btn:hover {
+
+  opacity: 0.9;
+
+}
+
+/* Modal */
+
+.modal-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0,0,0,.6);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 999;
+}
+
+.modal-card {
+
+  width: 550px;
+
+  max-width: 90%;
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 30px;
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.2);
+}
+
+.modal-card h2 {
+
+  margin-bottom: 20px;
+
+  color: #2563eb;
+}
+
+.modal-card p {
+
+  margin-bottom: 12px;
+}
+
+.close-btn {
+
+  width: 100%;
+
+  margin-top: 20px;
+
+  background: #64748b;
+
+  color: white;
+
+  border: none;
+
+  padding: 12px;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+}

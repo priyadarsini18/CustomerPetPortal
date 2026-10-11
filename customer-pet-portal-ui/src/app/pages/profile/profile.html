@@ -1,0 +1,184 @@
+<div class="profile-page" *ngIf="!isLoading">
+
+  <div class="profile-banner">
+
+    <div class="profile-avatar">
+      🐾
+    </div>
+
+    <div class="profile-info">
+
+      <h1>
+        {{ customer.firstName }}
+        {{ customer.lastName }}
+      </h1>
+
+      <p>
+        Pet Insurance Customer
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="profile-grid">
+
+    <!-- PERSONAL INFORMATION -->
+
+    <div class="profile-card">
+
+      <h2>
+        👤 Personal Information
+      </h2>
+
+      <div class="field">
+
+        <label>First Name</label>
+
+        <input
+          type="text"
+          [(ngModel)]="customer.firstName"
+          name="firstName">
+
+      </div>
+
+      <div class="field">
+
+        <label>Last Name</label>
+
+        <input
+          type="text"
+          [(ngModel)]="customer.lastName"
+          name="lastName">
+
+      </div>
+
+    </div>
+
+    <!-- CONTACT INFORMATION -->
+
+    <div class="profile-card">
+
+      <h2>
+        📞 Contact Information
+      </h2>
+
+      <div class="field">
+
+        <label>Email</label>
+
+        <input
+          type="email"
+          [(ngModel)]="customer.email"
+          readonly>
+
+      </div>
+
+      <div class="field">
+
+        <label>Phone Number</label>
+
+        <input
+          type="text"
+          [(ngModel)]="customer.phone"
+          name="phone">
+
+      </div>
+
+    </div>
+
+    <!-- PREFERENCES -->
+
+    <div class="profile-card preference-card">
+
+      <h2>
+        ⚙ Communication Preference
+      </h2>
+
+      <select
+        [(ngModel)]="customer.communicationPreference"
+        name="communicationPreference">
+
+        <option value="Email">
+          📧 Email
+        </option>
+
+        <option value="SMS">
+          📱 SMS
+        </option>
+
+        <option value="Phone">
+          ☎ Phone
+        </option>
+
+      </select>
+
+    </div>
+
+    <!-- ACCOUNT SUMMARY -->
+
+    <div class="profile-card summary-card">
+
+      <h2>
+        🐕 Account Summary
+      </h2>
+
+      <div class="summary-item">
+
+        <span>Customer ID</span>
+
+        <strong>
+          {{ customerId }}
+        </strong>
+
+      </div>
+
+      <div class="summary-item">
+
+        <span>Status</span>
+
+        <strong class="active-status">
+          Active
+        </strong>
+
+      </div>
+
+      <div class="summary-item">
+
+        <span>Member Since</span>
+
+        <strong>
+          PawCare Customer
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="action-bar">
+
+    <button
+      class="save-btn"
+      (click)="saveProfile()">
+
+      💾 Save Changes
+
+    </button>
+
+  </div>
+
+</div>
+
+<div
+  class="loading-container"
+  *ngIf="isLoading">
+
+  <div class="loader">
+
+    🐾 Loading Profile...
+
+  </div>
+
+</div>

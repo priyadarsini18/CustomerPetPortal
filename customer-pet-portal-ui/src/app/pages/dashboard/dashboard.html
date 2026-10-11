@@ -1,0 +1,132 @@
+<div class="dashboard-container">
+  
+
+  <!-- HERO SECTION -->
+
+  <div class="hero-banner">
+
+    <div class="hero-content">
+
+      <h1>
+        🐾 Welcome Back!
+      </h1>
+
+      <p>
+        Manage your pets, policies,
+        claims and profile in one place.
+      </p>
+
+    </div>
+
+    <div class="hero-pet">
+      🐶
+    </div>
+
+  </div>
+
+  <!-- SUMMARY CARDS -->
+
+  <div class="stats-grid">
+
+  <div class="stat-card">
+    <h2>{{ dashboard?.petsCount }}</h2>
+    <p>Total Pets</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ dashboard?.activePolicies }}</h2>
+    <p>Active Policies</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ dashboard?.openClaims }}</h2>
+    <p>Open Claims</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ dashboard?.policiesExpiringSoon }}</h2>
+    <p>Expiring Soon</p>
+  </div>
+
+</div>
+  <!-- QUICK ACCESS -->
+
+  <div class="quick-access">
+
+    <h2>Quick Access</h2>
+
+    <div class="feature-grid">
+
+      <!-- PETS -->
+
+      <div
+        class="feature-card pets"
+        routerLink="/pets"
+        tabindex="0">
+
+        <div class="icon">🐶</div>
+
+        <h3>My Pets</h3>
+
+        <p>
+          View and manage your pets
+        </p>
+
+      </div>
+
+      <!-- POLICIES -->
+
+      <div
+        class="feature-card policies"
+        routerLink="/policies"
+        tabindex="0">
+
+        <div class="icon">📋</div>
+
+        <h3>Policies</h3>
+
+        <p>
+          View policy details
+        </p>
+
+      </div>
+
+      <!-- CLAIMS -->
+
+      <div
+        class="feature-card claims"
+        routerLink="/claims"
+        tabindex="0">
+
+        <div class="icon">💰</div>
+
+        <h3>Claims</h3>
+
+        <p>
+          Track claim history
+        </p>
+
+      </div>
+
+      <!-- PROFILE -->
+
+      <div
+        class="feature-card profile"
+        routerLink="/profile"
+        tabindex="0">
+
+        <div class="icon">👤</div>
+
+        <h3>Profile</h3>
+
+        <p>
+          Manage your account
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,85 @@
+<!-- HAMBURGER MENU -->
+
+<button
+  *ngIf="
+    router.url !== '/login' &&
+    router.url !== '/register'
+  "
+  class="hamburger"
+  (click)="toggleSidebar()">
+
+  ☰
+
+</button>
+
+<!-- SIDEBAR -->
+
+<div
+  *ngIf="
+    router.url !== '/login' &&
+    router.url !== '/register'
+  "
+  class="sidebar"
+  [class.open]="isSidebarOpen">
+
+  <div class="logo">
+
+    🐾 PawCare
+
+  </div>
+
+  <ul>
+
+    <li (click)="navigate('/dashboard')">
+      🏠 Dashboard
+    </li>
+
+    <li (click)="navigate('/pets')">
+      🐶 My Pets
+    </li>
+
+    <li (click)="navigate('/policies')">
+      🛡 Policies
+    </li>
+
+    <li (click)="navigate('/claims')">
+      📄 Claims
+    </li>
+
+    <li (click)="navigate('/profile')">
+      👤 Profile
+    </li>
+
+    <li (click)="navigate('/import')">
+      📥 Import
+    </li>
+
+    <li (click)="navigate('/export')">
+      📤 Export
+    </li>
+
+  </ul>
+
+  <button
+    class="logout-btn"
+    (click)="logout()">
+
+    🚪 Logout
+
+  </button>
+
+</div>
+
+<!-- PAGE CONTENT -->
+
+<div
+  class="page-content"
+  [class.shift]="
+    router.url !== '/login' &&
+    router.url !== '/register' &&
+    isSidebarOpen
+  ">
+
+  <router-outlet></router-outlet>
+
+</div>

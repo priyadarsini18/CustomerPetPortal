@@ -1,0 +1,42 @@
+:root {
+
+  --primary: #C8A27A;
+  --primary-dark: #8B6F47;
+
+  --secondary: #E8D5C4;
+
+  --background: #F8F3EE;
+
+  --card-bg: #FFFDFB;
+
+  --text-primary: #4B3F35;
+  --text-secondary: #7A6A5B;
+
+  --success-bg: #DCE8DA;
+  --success-text: #55735A;
+
+  --danger-bg: #F6D8D8;
+  --danger-text: #A94442;
+
+  --border-color: #E5D6C5;
+
+  --shadow-sm:
+    0 4px 10px rgba(0, 0, 0, 0.05);
+
+  --shadow-md:
+    0 10px 25px rgba(0, 0, 0, 0.08);
+
+  --shadow-lg:
+    0 20px 40px rgba(0, 0, 0, 0.12);
+
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+
+  --gradient-primary:
+    linear-gradient(
+      135deg,
+      #C8A27A,
+      #8B6F47
+    );
+}

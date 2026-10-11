@@ -1,0 +1,134 @@
+<div class="claims-container">
+
+  <div class="claims-header">
+
+    <h1>📄 My Claims</h1>
+
+    <p>
+      Track your pet insurance claims.
+    </p>
+
+    <div class="claims-count">
+      Total Claims: {{ claims.length }}
+    </div>
+
+  </div>
+
+  <div
+    class="claims-grid"
+    *ngIf="claims.length > 0">
+
+    <div
+      class="claim-card"
+      *ngFor="let claim of claims">
+
+      <h2>
+        📄 {{ claim.claimNumber }}
+      </h2>
+
+      <p>
+        <strong>Treatment Date:</strong>
+        {{ claim.treatmentDate | date:'dd MMM yyyy' }}
+      </p>
+
+      <p>
+        <strong>Claimed Amount:</strong>
+        ₹{{ claim.claimedAmount }}
+      </p>
+
+      <p>
+        <strong>Approved Amount:</strong>
+        ₹{{ claim.approvedAmount }}
+      </p>
+
+      <p>
+        <strong>Status:</strong>
+
+        <span class="approved">
+
+          ✅ {{ claim.status }}
+
+        </span>
+
+      </p>
+
+      <button
+        class="view-btn"
+        type="button"
+        (click)="viewClaim(claim)">
+
+        View Details
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <div
+    class="empty-state"
+    *ngIf="claims.length === 0">
+
+    <div class="empty-icon">
+      📄
+    </div>
+
+    <h2>
+      No Claims Found
+    </h2>
+
+    <p>
+      You currently have no submitted claims.
+    </p>
+
+  </div>
+
+</div>
+
+<div
+  class="modal-overlay"
+  *ngIf="selectedClaim">
+
+  <div class="modal-card">
+
+    <h2>
+      📋 Claim Details
+    </h2>
+
+    <p>
+      <strong>Claim Number:</strong>
+      {{ selectedClaim.claimNumber }}
+    </p>
+
+    <p>
+      <strong>Treatment Date:</strong>
+      {{ selectedClaim.treatmentDate | date:'dd MMM yyyy' }}
+    </p>
+
+    <p>
+      <strong>Claimed Amount:</strong>
+      ₹{{ selectedClaim.claimedAmount }}
+    </p>
+
+    <p>
+      <strong>Approved Amount:</strong>
+      ₹{{ selectedClaim.approvedAmount }}
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      {{ selectedClaim.status }}
+    </p>
+
+    <button
+      class="close-btn"
+      type="button"
+      (click)="closeClaim()">
+
+      Close
+
+    </button>
+
+  </div>
+
+</div>

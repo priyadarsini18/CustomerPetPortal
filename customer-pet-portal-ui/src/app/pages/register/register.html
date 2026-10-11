@@ -1,0 +1,319 @@
+<div class="register-container">
+
+  <div class="register-card">
+
+    <div class="register-header">
+
+      <h1>🐾 PawCare</h1>
+
+      <h2>Create Account</h2>
+
+      <p>
+        Register to manage your pets and insurance policies
+      </p>
+
+    </div>
+
+    <form
+      #registerForm="ngForm"
+      (ngSubmit)="register()">
+
+      <!-- FIRST NAME -->
+
+      <div class="mb-3">
+
+        <label>First Name *</label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          [(ngModel)]="customer.firstName"
+          #firstName="ngModel"
+          required>
+
+        <div
+          class="error-message"
+          *ngIf="firstName.invalid && firstName.touched">
+
+          First Name is required
+
+        </div>
+
+      </div>
+
+      <!-- LAST NAME -->
+
+      <div class="mb-3">
+
+        <label>Last Name *</label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          [(ngModel)]="customer.lastName"
+          #lastName="ngModel"
+          required>
+
+        <div
+          class="error-message"
+          *ngIf="lastName.invalid && lastName.touched">
+
+          Last Name is required
+
+        </div>
+
+      </div>
+
+      <!-- EMAIL -->
+
+      <div class="mb-3">
+
+        <label>Email *</label>
+
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="customer.email"
+          #email="ngModel"
+          required
+          email>
+
+        <div
+          class="error-message"
+          *ngIf="email.invalid && email.touched">
+
+          Valid Email is required
+
+        </div>
+
+      </div>
+
+      <!-- PHONE -->
+
+      <div class="mb-3">
+
+  <label>Phone Number *</label>
+
+  <input
+    type="text"
+    class="form-control"
+    name="phone"
+    [(ngModel)]="customer.phone"
+    #phone="ngModel"
+    required
+    pattern="[0-9]{10}"
+    maxlength="10">
+
+  <div
+    class="error-message"
+    *ngIf="phone.invalid && phone.touched">
+
+    Phone Number must contain exactly 10 digits
+
+  </div>
+
+</div>
+
+      <!-- COMMUNICATION PREFERENCE -->
+
+      <div class="mb-3">
+
+        <label>Communication Preference *</label>
+
+        <select
+          class="form-control"
+          name="communicationPreference"
+          [(ngModel)]="customer.communicationPreference">
+
+          <option value="Email">
+            Email
+          </option>
+
+          <option value="SMS">
+            SMS
+          </option>
+
+          <option value="Phone">
+            Phone
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- ADDRESS -->
+
+      <div class="mb-3">
+
+        <label>Address *</label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="addressLine1"
+          [(ngModel)]="customer.addressLine1"
+          #addressLine1="ngModel"
+          required>
+
+        <div
+          class="error-message"
+          *ngIf="
+            addressLine1.invalid &&
+            addressLine1.touched
+          ">
+
+          Address is required
+
+        </div>
+
+      </div>
+
+      <!-- CITY -->
+
+      <div class="mb-3">
+
+        <label>City *</label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="city"
+          [(ngModel)]="customer.city"
+          #city="ngModel"
+          required>
+
+        <div
+          class="error-message"
+          *ngIf="city.invalid && city.touched">
+
+          City is required
+
+        </div>
+
+      </div>
+
+      <!-- STATE -->
+
+      <div class="mb-3">
+
+        <label>State *</label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="state"
+          [(ngModel)]="customer.state"
+          #state="ngModel"
+          required>
+
+        <div
+          class="error-message"
+          *ngIf="state.invalid && state.touched">
+
+          State is required
+
+        </div>
+
+      </div>
+
+      <!-- ZIP CODE -->
+
+      <div class="mb-3">
+
+        <label>Zip Code *</label>
+
+        <input
+          type="text"
+          class="form-control"
+          name="zipCode"
+          [(ngModel)]="customer.zipCode"
+          #zipCode="ngModel"
+          required>
+
+        <div
+          class="error-message"
+          *ngIf="
+            zipCode.invalid &&
+            zipCode.touched
+          ">
+
+          Zip Code is required
+
+        </div>
+
+      </div>
+
+      <!-- PASSWORD -->
+
+      <div class="mb-3">
+
+        <label>Password *</label>
+
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="customer.password"
+          #password="ngModel"
+          required
+          minlength="8">
+
+        <div
+          class="error-message"
+          *ngIf="
+            password.invalid &&
+            password.touched
+          ">
+
+          Password must be at least 8 characters
+
+        </div>
+
+      </div>
+
+      <!-- CONFIRM PASSWORD -->
+
+      <div class="mb-3">
+
+        <label>Confirm Password *</label>
+
+        <input
+          type="password"
+          class="form-control"
+          name="confirmPassword"
+          [(ngModel)]="customer.confirmPassword"
+          #confirmPassword="ngModel"
+          required>
+
+        <div
+          class="error-message"
+          *ngIf="
+            confirmPassword.invalid &&
+            confirmPassword.touched
+          ">
+
+          Confirm Password is required
+
+        </div>
+
+      </div>
+
+      <!-- REGISTER BUTTON -->
+
+      <button
+        type="submit"
+        class="register-btn"
+        [disabled]="registerForm.invalid">
+
+        Register
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

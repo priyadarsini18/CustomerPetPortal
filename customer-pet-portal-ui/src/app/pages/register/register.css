@@ -1,0 +1,90 @@
+.register-container {
+
+  min-height: 100vh;
+
+  background:
+  linear-gradient(
+    135deg,
+    #04284b,
+    #0f6d7a
+  );
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 30px;
+}
+
+.register-card {
+
+  background: white;
+
+  width: 800px;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  box-shadow:
+  0 10px 40px rgba(0,0,0,.15);
+}
+
+.error-message {
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border: 2px solid #dc2626;
+}
+
+input.ng-valid.ng-touched,
+select.ng-valid.ng-touched {
+  border: 2px solid #16a34a;
+}
+.error-message {
+  color: #dc2626;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border: 2px solid #dc2626;
+}
+
+input.ng-valid.ng-touched,
+select.ng-valid.ng-touched {
+  border: 2px solid #16a34a;
+}
+.register-card h1 {
+
+  color: #04284b;
+
+  font-weight: 700;
+}
+
+.register-card p {
+
+  color: gray;
+
+  margin-bottom: 20px;
+}
+
+.btn-success {
+
+  background: #0f6d7a;
+
+  border: none;
+}
+
+.btn-success:hover {
+
+  background: #0a5660;
+}
