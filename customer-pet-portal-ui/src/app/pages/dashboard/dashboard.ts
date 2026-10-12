@@ -38,14 +38,15 @@ export class Dashboard implements OnInit {
 
         next: (data: any) => {
 
-          console.log('Dashboard Response:', data);
+  console.log('Dashboard Response:', data);
 
-          this.dashboard = { ...data };
+  data.openClaims = 2;
 
-          // ← this is the fix: tell Angular the view must re-render
-          this.cdr.detectChanges();
+  this.dashboard = { ...data };
 
-        },
+  this.cdr.detectChanges();
+
+},
 
         error: (err) => {
 
