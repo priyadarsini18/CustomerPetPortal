@@ -153,12 +153,36 @@ export class Pets implements OnInit {
 
         error: (err: any) => {
 
-          console.error(
-            'Add Pet Error',
-            err
-          );
+  console.error(
+    'Add Pet Error',
+    err
+  );
 
-        }
+  if (err.error?.message) {
+
+    alert(
+      err.error.message
+    );
+
+  }
+  else if (
+    err.status === 409
+  ) {
+
+    alert(
+      'This pet already exists for this customer.'
+    );
+
+  }
+  else {
+
+    alert(
+      'Unable to add pet.'
+    );
+
+  }
+
+}
 
       });
 
@@ -338,6 +362,25 @@ export class Pets implements OnInit {
     this.selectedCoverage = null;
 
   }
+  allowOnlyLetters(
+  event: KeyboardEvent
+): void {
+
+  const charCode =
+    event.which
+      ? event.which
+      : event.keyCode;
+
+  const char =
+    String.fromCharCode(charCode);
+
+  if (
+    !/[A-Za-z ]/.test(char)
+  ) {
+    event.preventDefault();
+  }
+
+}
 
   calculateAge(
     dateOfBirth: string

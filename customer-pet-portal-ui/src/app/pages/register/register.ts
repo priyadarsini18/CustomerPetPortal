@@ -48,19 +48,12 @@ export class Register {
       );
 
       return;
-
     }
 
     this.authService
       .register(this.customer)
       .subscribe({
-
         next: (response: any) => {
-
-          console.log(
-            'Registration Success',
-            response
-          );
 
           alert(
             'Registration Successful'
@@ -69,39 +62,34 @@ export class Register {
           this.router.navigate(
             ['/login']
           );
-
         },
 
         error: (err: any) => {
 
-  console.error(
-    'Registration Error',
-    err
-  );
+          console.error(
+            'Registration Error',
+            err
+          );
 
-  if (err.status === 409) {
-
-    alert(
-      'Email already registered. Please use a different email.'
-    );
-
-  } else if (err.status === 400) {
-
-    alert(
-      'Invalid registration data.'
-    );
-
-  } else {
-
-    alert(
-      'Registration failed. Please try again.'
-    );
-
+        }
+      });
   }
 
-}
+  allowOnlyNumbers(
+    event: KeyboardEvent
+  ): void {
 
-      });
+    const charCode =
+      event.which
+        ? event.which
+        : event.keyCode;
+
+    if (
+      charCode < 48 ||
+      charCode > 57
+    ) {
+      event.preventDefault();
+    }
 
   }
 

@@ -79,9 +79,12 @@
         <label>Phone Number</label>
 
         <input
-          type="text"
-          [(ngModel)]="customer.phone"
-          name="phone">
+  type="text"
+  [(ngModel)]="customer.phone"
+  name="phone"
+  maxlength="10"
+  pattern="^[0-9]{10}$"
+  (keypress)="allowOnlyNumbers($event)">
 
       </div>
 

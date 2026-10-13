@@ -26,19 +26,22 @@
     <div class="form-grid">
 
       <input
-        type="text"
-        placeholder="Pet Name"
-        [(ngModel)]="newPet.petName">
+  type="text"
+  placeholder="Pet Name"
+  [(ngModel)]="newPet.petName"
+  (keypress)="allowOnlyLetters($event)">
 
       <input
-        type="text"
-        placeholder="Species"
-        [(ngModel)]="newPet.species">
+  type="text"
+  placeholder="Species"
+  [(ngModel)]="newPet.species"
+  (keypress)="allowOnlyLetters($event)">
 
       <input
-        type="text"
-        placeholder="Breed"
-        [(ngModel)]="newPet.breed">
+  type="text"
+  placeholder="Breed"
+  [(ngModel)]="newPet.breed"
+  (keypress)="allowOnlyLetters($event)">
 
       <input
         type="date"
@@ -65,16 +68,19 @@
     <h2>Edit Pet</h2>
 
     <input
-      type="text"
-      [(ngModel)]="editPetModel.petName">
+  type="text"
+  [(ngModel)]="editPetModel.petName"
+  (keypress)="allowOnlyLetters($event)">
 
     <input
-      type="text"
-      [(ngModel)]="editPetModel.species">
+  type="text"
+  [(ngModel)]="editPetModel.species"
+  (keypress)="allowOnlyLetters($event)">
 
     <input
-      type="text"
-      [(ngModel)]="editPetModel.breed">
+  type="text"
+  [(ngModel)]="editPetModel.breed"
+  (keypress)="allowOnlyLetters($event)">
 
     <input
       type="date"

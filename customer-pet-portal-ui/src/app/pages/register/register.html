@@ -25,21 +25,27 @@
         <label>First Name *</label>
 
         <input
-          type="text"
-          class="form-control"
-          name="firstName"
-          [(ngModel)]="customer.firstName"
-          #firstName="ngModel"
-          required>
+  type="text"
+  class="form-control"
+  name="firstName"
+  [(ngModel)]="customer.firstName"
+  #firstName="ngModel"
+  required
+  pattern="^[A-Za-z ]+$">
 
         <div
-          class="error-message"
-          *ngIf="firstName.invalid && firstName.touched">
+  class="error-message"
+  *ngIf="firstName.invalid && firstName.touched">
 
-          First Name is required
+  <span *ngIf="firstName.errors?.['required']">
+    First Name is required
+  </span>
 
-        </div>
+  <span *ngIf="firstName.errors?.['pattern']">
+    First Name should contain only letters
+  </span>
 
+</div>
       </div>
 
       <!-- LAST NAME -->
@@ -49,13 +55,13 @@
         <label>Last Name *</label>
 
         <input
-          type="text"
-          class="form-control"
-          name="lastName"
-          [(ngModel)]="customer.lastName"
-          #lastName="ngModel"
-          required>
-
+  type="text"
+  class="form-control"
+  name="lastName"
+  [(ngModel)]="customer.lastName"
+  #lastName="ngModel"
+  required
+  pattern="^[A-Za-z ]+$">
         <div
           class="error-message"
           *ngIf="lastName.invalid && lastName.touched">
@@ -82,12 +88,18 @@
           email>
 
         <div
-          class="error-message"
-          *ngIf="email.invalid && email.touched">
+  class="error-message"
+  *ngIf="lastName.invalid && lastName.touched">
 
-          Valid Email is required
+  <span *ngIf="lastName.errors?.['required']">
+    Last Name is required
+  </span>
 
-        </div>
+  <span *ngIf="lastName.errors?.['pattern']">
+    Last Name should contain only letters
+  </span>
+
+</div>
 
       </div>
 
@@ -98,14 +110,15 @@
   <label>Phone Number *</label>
 
   <input
-    type="text"
-    class="form-control"
-    name="phone"
-    [(ngModel)]="customer.phone"
-    #phone="ngModel"
-    required
-    pattern="[0-9]{10}"
-    maxlength="10">
+  type="text"
+  class="form-control"
+  name="phone"
+  [(ngModel)]="customer.phone"
+  #phone="ngModel"
+  required
+  pattern="^[0-9]{10}$"
+  maxlength="10"
+  (keypress)="allowOnlyNumbers($event)">
 
   <div
     class="error-message"
@@ -178,12 +191,13 @@
         <label>City *</label>
 
         <input
-          type="text"
-          class="form-control"
-          name="city"
-          [(ngModel)]="customer.city"
-          #city="ngModel"
-          required>
+  type="text"
+  class="form-control"
+  name="city"
+  [(ngModel)]="customer.city"
+  #city="ngModel"
+  required
+  pattern="^[A-Za-z ]+$">
 
         <div
           class="error-message"
@@ -202,12 +216,13 @@
         <label>State *</label>
 
         <input
-          type="text"
-          class="form-control"
-          name="state"
-          [(ngModel)]="customer.state"
-          #state="ngModel"
-          required>
+  type="text"
+  class="form-control"
+  name="state"
+  [(ngModel)]="customer.state"
+  #state="ngModel"
+  required
+  pattern="^[A-Za-z ]+$">
 
         <div
           class="error-message"
@@ -226,12 +241,15 @@
         <label>Zip Code *</label>
 
         <input
-          type="text"
-          class="form-control"
-          name="zipCode"
-          [(ngModel)]="customer.zipCode"
-          #zipCode="ngModel"
-          required>
+  type="text"
+  class="form-control"
+  name="zipCode"
+  [(ngModel)]="customer.zipCode"
+  #zipCode="ngModel"
+  required
+  pattern="^[0-9]{6}$"
+  maxlength="6"
+  (keypress)="allowOnlyNumbers($event)">
 
         <div
           class="error-message"

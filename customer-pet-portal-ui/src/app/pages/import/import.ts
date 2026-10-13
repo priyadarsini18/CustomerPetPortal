@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-import',
@@ -14,12 +15,26 @@ export class ImportPage {
 
   selectedFile: File | null = null;
 
-  onFileSelected(event: Event): void {
+  private apiUrl =
+    'http://localhost:5278/api/excel/customers/import';
 
-    const input = event.target as HTMLInputElement;
+  constructor(
+    private http: HttpClient
+  ) { }
 
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
+  onFileSelected(
+    event: Event
+  ): void {
+
+    const input =
+      event.target as HTMLInputElement;
+
+    if (
+      input.files &&
+      input.files.length > 0
+    ) {
+      this.selectedFile =
+        input.files[0];
     }
 
   }
@@ -28,15 +43,56 @@ export class ImportPage {
 
     if (!this.selectedFile) {
 
-      alert('Please select an Excel file');
+      alert(
+        'Please select an Excel file'
+      );
+
       return;
 
     }
 
-    alert(
-      'Ready to import: ' +
-      this.selectedFile.name
+    const formData =
+      new FormData();
+
+    formData.append(
+      'file',
+      this.selectedFile
     );
+
+    this.http
+      .post(
+        this.apiUrl,
+        formData
+      )
+      .subscribe({
+
+        next: (response) => {
+
+          console.log(
+            'Import Success:',
+            response
+          );
+
+          alert(
+            'Customer data imported successfully.'
+          );
+
+        },
+
+        error: (err) => {
+
+          console.error(
+            'Import Error:',
+            err
+          );
+
+          alert(
+            'Import failed.'
+          );
+
+        }
+
+      });
 
   }
 
