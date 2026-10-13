@@ -63,13 +63,18 @@
   required
   pattern="^[A-Za-z ]+$">
         <div
-          class="error-message"
-          *ngIf="lastName.invalid && lastName.touched">
+  class="error-message"
+  *ngIf="lastName.invalid && lastName.touched">
 
-          Last Name is required
+  <span *ngIf="lastName.errors?.['required']">
+    Last Name is required
+  </span>
 
-        </div>
+  <span *ngIf="lastName.errors?.['pattern']">
+    Last Name should contain only letters
+  </span>
 
+</div>
       </div>
 
       <!-- EMAIL -->
@@ -89,15 +94,9 @@
 
         <div
   class="error-message"
-  *ngIf="lastName.invalid && lastName.touched">
+  *ngIf="email.invalid && email.touched">
 
-  <span *ngIf="lastName.errors?.['required']">
-    Last Name is required
-  </span>
-
-  <span *ngIf="lastName.errors?.['pattern']">
-    Last Name should contain only letters
-  </span>
+  Valid Email is required
 
 </div>
 
@@ -200,12 +199,12 @@
   pattern="^[A-Za-z ]+$">
 
         <div
-          class="error-message"
-          *ngIf="city.invalid && city.touched">
+  class="error-message"
+  *ngIf="city.invalid && city.touched">
 
-          City is required
+  City should contain only letters
 
-        </div>
+</div>
 
       </div>
 
@@ -225,12 +224,12 @@
   pattern="^[A-Za-z ]+$">
 
         <div
-          class="error-message"
-          *ngIf="state.invalid && state.touched">
+  class="error-message"
+  *ngIf="state.invalid && state.touched">
 
-          State is required
+  State should contain only letters
 
-        </div>
+</div>
 
       </div>
 
@@ -252,15 +251,12 @@
   (keypress)="allowOnlyNumbers($event)">
 
         <div
-          class="error-message"
-          *ngIf="
-            zipCode.invalid &&
-            zipCode.touched
-          ">
+  class="error-message"
+  *ngIf="zipCode.invalid && zipCode.touched">
 
-          Zip Code is required
+  Zip Code must contain exactly 6 digits
 
-        </div>
+</div>
 
       </div>
 
