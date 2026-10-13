@@ -36,9 +36,10 @@
         <label>First Name</label>
 
         <input
-          type="text"
-          [(ngModel)]="customer.firstName"
-          name="firstName">
+  type="text"
+  [(ngModel)]="customer.firstName"
+  name="firstName"
+  (keypress)="allowOnlyLetters($event)">
 
       </div>
 
@@ -47,9 +48,11 @@
         <label>Last Name</label>
 
         <input
-          type="text"
-          [(ngModel)]="customer.lastName"
-          name="lastName">
+  type="text"
+  [(ngModel)]="customer.lastName"
+  name="lastName"
+  (keypress)="allowOnlyLetters($event)">
+
 
       </div>
 

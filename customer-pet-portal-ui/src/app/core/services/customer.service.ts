@@ -23,5 +23,16 @@ export class CustomerService {
     );
 
   }
+  updateCustomer(
+  customerId: number,
+  customer: any
+): Observable<any> {
+
+  return this.http.put<any>(
+    `${this.apiUrl}/${customerId}`,
+    customer
+  );
+
+}
 
 }

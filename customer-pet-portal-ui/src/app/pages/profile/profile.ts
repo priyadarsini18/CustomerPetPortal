@@ -62,6 +62,25 @@ export class Profile implements OnInit {
     }
 
   }
+  allowOnlyLetters(
+  event: KeyboardEvent
+): void {
+
+  const charCode =
+    event.which
+      ? event.which
+      : event.keyCode;
+
+  const char =
+    String.fromCharCode(charCode);
+
+  if (
+    !/[A-Za-z ]/.test(char)
+  ) {
+    event.preventDefault();
+  }
+
+}
 
   loadProfile(): void {
 
@@ -112,16 +131,43 @@ export class Profile implements OnInit {
 
   saveProfile(): void {
 
-    console.log(
-      'Updated Customer:',
+  this.customerService
+    .updateCustomer(
+      this.customerId,
       this.customer
-    );
+    )
+    .subscribe({
 
-    alert(
-      'Profile Updated Successfully'
-    );
+      next: (response: any) => {
 
-  }
+        console.log(
+          'Profile Updated:',
+          response
+        );
+
+        alert(
+          'Profile Updated Successfully'
+        );
+
+      },
+
+      error: (err: any) => {
+
+        console.error(
+          'Profile Update Error:',
+          err
+        );
+
+        alert(
+          'Profile Update Failed'
+        );
+
+      }
+
+    });
+
+}
+
   allowOnlyNumbers(
     event: KeyboardEvent
   ): void {
