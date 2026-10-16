@@ -26,18 +26,68 @@ namespace CustomerPetPortal.API.Controllers
 
             return Ok(policies);
         }
+        
         [HttpPost]
 public async Task<IActionResult> AddPolicy(
     int customerId,
     [FromBody] CreatePolicyDto dto)
 {
-    var policy =
-        await _service
-            .AddPolicyAsync(
-                customerId,
-                dto);
+    try
+    {
+        var policy =
+            await _service
+                .AddPolicyAsync(
+                    customerId,
+                    dto);
 
-    return Ok(policy);
+        return Ok(policy);
+    }
+    catch (InvalidOperationException ex)
+    {
+        return BadRequest(new
+        {
+            Message = ex.Message
+        });
+    }
 }
+[HttpPut("{policyId}/deactivate")]
+public async Task<IActionResult>
+DeactivatePolicy(
+    int customerId,
+    int policyId
+)
+{
+    await _service
+        .DeactivatePolicyAsync(
+            customerId,
+            policyId);
+
+    return NoContent();
+}
+[HttpDelete("{policyId}")]
+public async Task<IActionResult>
+DeletePolicy(
+    int customerId,
+    int policyId)
+{
+    await _service
+        .DeletePolicyAsync(
+            customerId,
+            policyId);
+
+    return NoContent();
+}
+[HttpPut("{policyId}/activate")]
+public async Task<IActionResult> ActivatePolicy(
+    int customerId,
+    int policyId)
+{
+    await _service.ActivatePolicyAsync(
+        customerId,
+        policyId);
+
+    return NoContent();
+}
+
     }
 }

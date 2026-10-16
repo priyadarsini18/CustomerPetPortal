@@ -30,17 +30,24 @@ namespace CustomerPetPortal.API.Controllers
 
         // ADD THIS METHOD HERE
         [HttpPost]
-        public async Task<IActionResult> AddClaim(
-            int customerId,
-            [FromBody] CreateClaimDto dto)
-        {
-            var claim =
-                await _service
-                    .AddClaimAsync(
-                        customerId,
-                        dto);
+public async Task<IActionResult> AddClaim(
+    int customerId,
+    [FromBody] CreateClaimDto dto)
+{
+    try
+    {
+        var claim =
+            await _service
+                .AddClaimAsync(
+                    customerId,
+                    dto);
 
-            return Ok(claim);
-        }
+        return Ok(claim);
+    }
+    catch (InvalidOperationException ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
     }
 }

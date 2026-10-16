@@ -12,6 +12,7 @@ namespace CustomerPetPortal.API.DTOs.Policy
 
         public int PetId { get; set; }
 
+public string PetName { get; set; } = string.Empty;
         public decimal Premium { get; set; }
 
         public string Status { get; set; }

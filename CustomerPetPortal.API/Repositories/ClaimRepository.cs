@@ -18,8 +18,9 @@ namespace CustomerPetPortal.API.Repositories
             GetClaimsByCustomerIdAsync(int customerId)
         {
             return await _context.CustomerClaims
-                .Where(c => c.CustomerId == customerId)
-                .ToListAsync();
+    .Include(c => c.Pet)
+    .Where(c => c.CustomerId == customerId)
+    .ToListAsync();
         }
         public async Task<CustomerClaim>
     AddClaimAsync(

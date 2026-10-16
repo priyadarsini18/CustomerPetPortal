@@ -9,5 +9,14 @@ namespace CustomerPetPortal.API.Services.Interfaces
             Task<PolicyDto> AddPolicyAsync(
     int customerId,
     CreatePolicyDto dto);
+    Task DeactivatePolicyAsync(
+    int customerId,
+    int policyId);
+Task ActivatePolicyAsync(
+    int customerId,
+    int policyId);
+Task DeletePolicyAsync(
+    int customerId,
+    int policyId);
     }
 }

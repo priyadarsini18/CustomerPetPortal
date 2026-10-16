@@ -24,4 +24,27 @@ export class PolicyService {
 
   }
 
+  deactivatePolicy(
+    customerId: number,
+    policyId: number
+  ): Observable<any> {
+
+    return this.http.put(
+      `${this.apiUrl}/${customerId}/policies/${policyId}/deactivate`,
+      {}
+    );
+
+  }
+
+  deletePolicy(
+    customerId: number,
+    policyId: number
+  ): Observable<any> {
+
+    return this.http.delete(
+      `${this.apiUrl}/${customerId}/policies/${policyId}`
+    );
+
+  }
+
 }

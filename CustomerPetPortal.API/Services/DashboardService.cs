@@ -40,6 +40,7 @@ namespace CustomerPetPortal.API.Services
     await _context.CustomerPolicies
         .CountAsync(p =>
             p.CustomerId == customerId &&
+            p.Status == "Active" &&
             p.ExpiryDate <=
                 DateTime.Today.AddDays(30));
 

@@ -11,7 +11,12 @@ namespace CustomerPetPortal.API.DTOs.Claim
 
         public int PetId { get; set; }
 
-        public DateOnly TreatmentDate { get; set; }
+public string PetName { get; set; }
+    = string.Empty;
+
+public DateOnly TreatmentDate { get; set; }
+
+        
 
         public decimal ClaimedAmount { get; set; }
 

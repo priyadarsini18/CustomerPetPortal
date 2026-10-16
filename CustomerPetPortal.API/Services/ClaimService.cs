@@ -2,18 +2,21 @@ using CustomerPetPortal.API.DTOs.Claim;
 using CustomerPetPortal.API.Repositories.Interfaces;
 using CustomerPetPortal.API.Services.Interfaces;
 using CustomerPetPortal.Models;
+using CustomerPetPortal.API.Repositories.Interfaces;
 
 namespace CustomerPetPortal.API.Services
 {
     public class ClaimService : IClaimService
     {
         private readonly IClaimRepository _repository;
-
+        private readonly IPolicyRepository _policyRepository;
         public ClaimService(
-            IClaimRepository repository)
-        {
-            _repository = repository;
-        }
+    IClaimRepository repository,
+    IPolicyRepository policyRepository)
+{
+    _repository = repository;
+    _policyRepository = policyRepository;
+}
 
         public async Task<List<ClaimDto>>
             GetClaimsByCustomerIdAsync(
@@ -30,6 +33,7 @@ namespace CustomerPetPortal.API.Services
                 ClaimNumber = c.ClaimNumber,
                 CustomerId = c.CustomerId,
                 PetId = c.PetId,
+PetName = c.Pet?.PetName ?? string.Empty,
                 TreatmentDate =
     DateOnly.FromDateTime(
         c.TreatmentDate),
@@ -44,6 +48,21 @@ namespace CustomerPetPortal.API.Services
                 int customerId,
                 CreateClaimDto dto)
         {
+            var policies =
+    await _policyRepository
+        .GetPoliciesByCustomerIdAsync(
+            customerId);
+
+var activePolicy =
+    policies.FirstOrDefault(p =>
+        p.PetId == dto.PetId &&
+        p.Status == "Active");
+
+if (activePolicy == null)
+{
+    throw new InvalidOperationException(
+        "Cannot create claim. No active policy exists for this pet.");
+}
             var claimCount =
                 (await _repository
                     .GetClaimsByCustomerIdAsync(
@@ -92,6 +111,8 @@ namespace CustomerPetPortal.API.Services
 
                 PetId =
                     claim.PetId,
+                    PetName =
+    claim.Pet?.PetName ?? string.Empty,
 
                 TreatmentDate =
     DateOnly.FromDateTime(

@@ -1,9 +1,13 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
+
+import { PolicyService }
+from '../../core/services/policy.service';
 
 @Component({
   selector: 'app-policies',
@@ -12,7 +16,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './policies.html',
-  styleUrl: './policies.css'
+  styleUrls: ['./policies.css']
 })
 export class Policies implements OnInit {
 
@@ -22,9 +26,21 @@ export class Policies implements OnInit {
 
   isLoading = true;
 
-  constructor() { }
+  customerId = Number(
+    localStorage.getItem('customerId')
+  );
+
+  constructor(
+    private policyService: PolicyService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
+
+    console.log(
+      'CustomerId:',
+      this.customerId
+    );
 
     this.loadPolicies();
 
@@ -32,29 +48,132 @@ export class Policies implements OnInit {
 
   loadPolicies(): void {
 
-    this.policies = [
+    console.log(
+      'Calling API'
+    );
 
-      {
-        policyNumber: 'POL001',
-        coverage: 'Gold Plan',
-        premium: 1200,
-        status: 'Active',
-        effectiveDate: '2026-01-01',
-        expiryDate: '2026-12-31'
-      },
+    this.isLoading = true;
 
-      {
-        policyNumber: 'POL002',
-        coverage: 'Silver Plan',
-        premium: 900,
-        status: 'Active',
-        effectiveDate: '2026-02-01',
-        expiryDate: '2027-01-31'
-      }
+    this.policyService
+      .getPolicies(
+        this.customerId
+      )
+      .subscribe({
 
-    ];
+        next: (data: any[]) => {
 
-    this.isLoading = false;
+          console.log(
+            'Policies loaded:',
+            data
+          );
+
+          this.policies = [...data];
+
+          this.isLoading = false;
+
+          this.cdr.detectChanges();
+
+        },
+
+        error: (err: any) => {
+
+          console.error(
+            'Load Policies Error',
+            err
+          );
+
+          this.isLoading = false;
+
+          this.cdr.detectChanges();
+
+        }
+
+      });
+
+  }
+
+  deactivatePolicy(
+    policyId: number
+  ): void {
+
+    this.policyService
+      .deactivatePolicy(
+        this.customerId,
+        policyId
+      )
+      .subscribe({
+
+        next: () => {
+
+          alert(
+            'Policy Deactivated Successfully'
+          );
+
+          this.closePolicy();
+
+          this.loadPolicies();
+
+        },
+
+        error: (err: any) => {
+
+          console.error(
+            'Deactivate Policy Error',
+            err
+          );
+
+        }
+
+      });
+
+  }
+
+  deletePolicy(
+    policyId: number
+  ): void {
+
+    if (
+      !confirm(
+        'Are you sure you want to delete this policy?'
+      )
+    ) {
+      return;
+    }
+
+    this.policyService
+      .deletePolicy(
+        this.customerId,
+        policyId
+      )
+      .subscribe({
+
+        next: () => {
+
+          alert(
+            'Policy Deleted Successfully'
+          );
+
+          this.closePolicy();
+
+          this.loadPolicies();
+
+        },
+
+        error: (err: any) => {
+
+          console.error(
+            'Delete Policy Error',
+            err
+          );
+
+          alert(
+            err.error?.message ||
+            'Unable to delete policy.'
+          );
+
+        }
+
+      });
 
   }
 
@@ -62,13 +181,15 @@ export class Policies implements OnInit {
     policy: any
   ): void {
 
-    this.selectedPolicy = policy;
+    this.selectedPolicy =
+      policy;
 
   }
 
   closePolicy(): void {
 
-    this.selectedPolicy = null;
+    this.selectedPolicy =
+      null;
 
   }
 

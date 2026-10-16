@@ -174,9 +174,16 @@
     </button>
 
   </div>
+<p *ngIf="hasActivePolicies" class="warning-text">
+  Customer cannot be deleted while active policies exist.
+</p>
 
-</div>
-
+<button
+  class="delete-btn"
+  [disabled]="hasActivePolicies"
+  (click)="deleteAccount()">
+  🗑 Delete Account
+</button>
 <div
   class="loading-container"
   *ngIf="isLoading">

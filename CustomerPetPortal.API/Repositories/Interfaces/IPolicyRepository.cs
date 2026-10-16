@@ -14,5 +14,16 @@ Task<bool> HasActivePolicyForCustomerAsync(
     Task<CustomerPolicy>
     AddPolicyAsync(
         CustomerPolicy policy);
+        Task<CustomerPolicy?>
+GetPolicyByIdAsync(
+    int policyId);
+    
+
+Task UpdatePolicyAsync(
+    CustomerPolicy policy);
+
+Task DeletePolicyAsync(
+    CustomerPolicy policy);
     }
+    
 }

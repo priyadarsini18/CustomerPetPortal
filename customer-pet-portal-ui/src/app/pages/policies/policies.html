@@ -11,6 +11,22 @@
     Total Policies: {{ policies.length }}
 
   </div>
+  <button
+  class="refresh-btn"
+  (click)="loadPolicies()">
+
+  🔄 Refresh Policies
+
+</button>
+  <div
+  class="no-policies"
+  *ngIf="policies.length === 0">
+
+  <p>🛡 No policies found.</p>
+
+</div>
+
+
 
   <div
     class="policy-card"
@@ -23,11 +39,16 @@
     </h2>
 
     <p>
+  <strong>Pet Name:</strong>
+  {{ policy.petName }}
+</p>
 
-      <strong>Coverage:</strong>
-      {{ policy.coverage }}
+<p>
+  <strong>Pet ID:</strong>
+  {{ policy.petId }}
+</p>
 
-    </p>
+    
 
     <p>
 
@@ -39,20 +60,35 @@
     <p>
 
       <strong>Status:</strong>
-      ✅ {{ policy.status }}
+
+      <span
+  *ngIf="policy.status === 'Active'"
+  style="color: green; font-weight: bold;">
+
+  ✅ Active
+
+</span>
+
+<span
+  *ngIf="policy.status === 'Inactive'"
+  style="color: red; font-weight: bold;">
+
+  ❌ Inactive
+
+</span>
 
     </p>
 
     <p>
 
-      <strong>Effective:</strong>
+      <strong>Effective Date:</strong>
       {{ policy.effectiveDate | date:'dd MMM yyyy' }}
 
     </p>
 
     <p>
 
-      <strong>Expiry:</strong>
+      <strong>Expiry Date:</strong>
       {{ policy.expiryDate | date:'dd MMM yyyy' }}
 
     </p>
@@ -62,6 +98,24 @@
       (click)="viewPolicy(policy)">
 
       View Details
+
+    </button>
+
+    <button
+      *ngIf="policy.status === 'Active'"
+      class="deactivate-btn"
+      (click)="deactivatePolicy(policy.policyId)">
+
+      Deactivate
+
+    </button>
+
+    <button
+      *ngIf="policy.status === 'Inactive'"
+      class="delete-btn"
+      (click)="deletePolicy(policy.policyId)">
+
+      Delete
 
     </button>
 
@@ -80,34 +134,75 @@
     </h2>
 
     <p>
+
+      <strong>Policy ID:</strong>
+      {{ selectedPolicy.policyId }}
+
+    </p>
+
+    <p>
+
       <strong>Policy Number:</strong>
       {{ selectedPolicy.policyNumber }}
+
     </p>
 
-    <p>
-      <strong>Coverage:</strong>
-      {{ selectedPolicy.coverage }}
-    </p>
+   <p>
+  <strong>Pet Name:</strong>
+  {{ selectedPolicy.petName }}
+</p>
+
+<p>
+  <strong>Pet ID:</strong>
+  {{ selectedPolicy.petId }}
+</p>
 
     <p>
+
       <strong>Premium:</strong>
       ₹{{ selectedPolicy.premium }}
+
     </p>
 
     <p>
+
       <strong>Status:</strong>
       {{ selectedPolicy.status }}
+
     </p>
 
     <p>
+
       <strong>Effective Date:</strong>
       {{ selectedPolicy.effectiveDate | date:'dd MMM yyyy' }}
+
     </p>
 
     <p>
+
       <strong>Expiry Date:</strong>
       {{ selectedPolicy.expiryDate | date:'dd MMM yyyy' }}
+
     </p>
+    
+
+    <button
+      *ngIf="selectedPolicy.status === 'Active'"
+      class="deactivate-btn"
+      (click)="deactivatePolicy(selectedPolicy.policyId)">
+
+      Deactivate Policy
+
+    </button>
+
+    <button
+      *ngIf="selectedPolicy.status === 'Inactive'"
+      class="delete-btn"
+      (click)="deletePolicy(selectedPolicy.policyId)">
+
+      Delete Policy
+
+    </button>
 
     <button
       class="close-btn"
@@ -118,5 +213,6 @@
     </button>
 
   </div>
-
+ 
 </div>
+

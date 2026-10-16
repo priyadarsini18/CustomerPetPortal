@@ -1,9 +1,13 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
+
+import { ClaimService }
+from '../../core/services/claim.service';
 
 @Component({
   selector: 'app-claims',
@@ -12,7 +16,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './claims.html',
-  styleUrl: './claims.css'
+  styleUrls: ['./claims.css']
 })
 export class Claims implements OnInit {
 
@@ -22,9 +26,21 @@ export class Claims implements OnInit {
 
   isLoading = true;
 
-  constructor() { }
+  customerId = Number(
+    localStorage.getItem('customerId')
+  );
+
+  constructor(
+    private claimService: ClaimService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
+
+    console.log(
+      'Customer Id:',
+      this.customerId
+    );
 
     this.loadClaims();
 
@@ -32,27 +48,41 @@ export class Claims implements OnInit {
 
   loadClaims(): void {
 
-    this.claims = [
+    this.isLoading = true;
 
-      {
-        claimNumber: 'CLM001',
-        treatmentDate: '2026-10-08',
-        claimedAmount: 5000,
-        approvedAmount: 4500,
-        status: 'Approved'
-      },
+    this.claimService
+      .getClaims(
+        this.customerId
+      )
+      .subscribe({
 
-      {
-        claimNumber: 'CLM002',
-        treatmentDate: '2026-10-09',
-        claimedAmount: 3000,
-        approvedAmount: 3000,
-        status: 'Approved'
-      }
+        next: (data: any[]) => {
 
-    ];
+          console.log(
+            'Claims:',
+            data
+          );
 
-    this.isLoading = false;
+          this.claims = [...data];
+
+          this.isLoading = false;
+
+          this.cdr.detectChanges();
+
+        },
+
+        error: (err: any) => {
+
+          console.error(
+            'Load Claims Error',
+            err
+          );
+
+          this.isLoading = false;
+
+        }
+
+      });
 
   }
 

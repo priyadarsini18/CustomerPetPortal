@@ -3,6 +3,7 @@
   <div class="claims-header">
 
     <h1>📄 My Claims</h1>
+   
 
     <p>
       Track your pet insurance claims.
@@ -25,6 +26,15 @@
       <h2>
         📄 {{ claim.claimNumber }}
       </h2>
+      <p>
+  <strong>Pet Name:</strong>
+  {{ claim.petName }}
+</p>
+
+<p>
+  <strong>Pet ID:</strong>
+  {{ claim.petId }}
+</p>
 
       <p>
         <strong>Treatment Date:</strong>
@@ -99,6 +109,15 @@
       <strong>Claim Number:</strong>
       {{ selectedClaim.claimNumber }}
     </p>
+    <p>
+  <strong>Pet Name:</strong>
+  {{ selectedClaim.petName }}
+</p>
+
+<p>
+  <strong>Pet ID:</strong>
+  {{ selectedClaim.petId }}
+</p>
 
     <p>
       <strong>Treatment Date:</strong>

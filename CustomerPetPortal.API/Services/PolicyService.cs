@@ -30,6 +30,7 @@ namespace CustomerPetPortal.API.Services
                 PolicyNumber = p.PolicyNumber,
                 CustomerId = p.CustomerId,
                 PetId = p.PetId,
+                PetName = p.Pet?.PetName ?? string.Empty,
                 Premium = p.Premium,
                 Status = p.Status,
                 EffectiveDate = p.EffectiveDate,
@@ -54,6 +55,18 @@ namespace CustomerPetPortal.API.Services
                     "Premium must be greater than zero.");
             }
 
+            var hasActivePolicy =
+                await _repository
+                    .HasActivePolicyForPetAsync(
+                        dto.PetId);
+
+            if (hasActivePolicy)
+            {
+                throw new InvalidOperationException(
+                    "This pet already has an active policy."
+                );
+            }
+
             var existingPolicies =
                 await _repository
                     .GetPoliciesByCustomerIdAsync(
@@ -67,17 +80,11 @@ namespace CustomerPetPortal.API.Services
                 new CustomerPolicy
                 {
                     PolicyNumber = policyNumber,
-
                     CustomerId = customerId,
-
                     PetId = dto.PetId,
-
                     EffectiveDate = dto.EffectiveDate,
-
-ExpiryDate = dto.ExpiryDate,
-
+                    ExpiryDate = dto.ExpiryDate,
                     Premium = dto.Premium,
-
                     Status = dto.Status
                 };
 
@@ -87,22 +94,119 @@ ExpiryDate = dto.ExpiryDate,
             return new PolicyDto
             {
                 PolicyId = policy.PolicyId,
-
                 PolicyNumber = policy.PolicyNumber,
-
                 CustomerId = policy.CustomerId,
-
                 PetId = policy.PetId,
-
+                PetName = policy.Pet?.PetName ?? string.Empty,
                 EffectiveDate = policy.EffectiveDate,
-
-ExpiryDate = policy.ExpiryDate,
-
-
+                ExpiryDate = policy.ExpiryDate,
                 Premium = policy.Premium,
-
                 Status = policy.Status
             };
         }
+
+        public async Task
+            DeactivatePolicyAsync(
+                int customerId,
+                int policyId)
+        {
+            var policy =
+                await _repository
+                    .GetPolicyByIdAsync(
+                        policyId);
+
+            if (
+                policy == null ||
+                policy.CustomerId != customerId
+            )
+            {
+                throw new Exception(
+                    "Policy not found."
+                );
+            }
+
+            policy.Status = "Inactive";
+
+            await _repository
+                .UpdatePolicyAsync(
+                    policy);
+        }
+
+        public async Task
+            DeletePolicyAsync(
+                int customerId,
+                int policyId)
+        {
+            var policy =
+                await _repository
+                    .GetPolicyByIdAsync(
+                        policyId);
+
+            if (
+                policy == null ||
+                policy.CustomerId != customerId
+            )
+            {
+                throw new Exception(
+                    "Policy not found."
+                );
+            }
+
+            if (
+                policy.Status == "Active"
+            )
+            {
+                throw new Exception(
+                    "Active policies cannot be deleted."
+                );
+            }
+
+            await _repository
+                .DeletePolicyAsync(
+                    policy);
+        }
+       public async Task ActivatePolicyAsync(
+    int customerId,
+    int policyId)
+{
+    var policy =
+        await _repository
+            .GetPolicyByIdAsync(
+                policyId);
+
+    if (
+        policy == null ||
+        policy.CustomerId != customerId
+    )
+    {
+        throw new Exception(
+            "Policy not found."
+        );
+    }
+
+   var policies =
+    await _repository
+        .GetPoliciesByCustomerIdAsync(
+            customerId);
+
+var hasActivePolicy =
+    policies.Any(p =>
+        p.PetId == policy.PetId &&
+        p.PolicyId != policy.PolicyId &&
+        p.Status == "Active");
+
+if (hasActivePolicy)
+{
+    throw new InvalidOperationException(
+        "This pet already has an active policy."
+    );
+}
+
+    policy.Status = "Active";
+
+    await _repository
+        .UpdatePolicyAsync(
+            policy);
+}
     }
 }
